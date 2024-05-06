@@ -1,0 +1,183 @@
+SELECTEURS 
+
+ /* 
+    votre commentaire
+    CSS => attribut style dans la balise; balise style dans la balise head; fichier CSS séparé !
+ */ 
+
+
+/*
+
+  https://www.w3schools.com/cssref/css_selectors.asp
+
+  https://developer.mozilla.org/fr/docs/Web/CSS/S%C3%A9lecteurs_CSS
+
+  selecteur{ proprieté: valeur; }
+
+  element html{ propriété: valeur; }
+
+  el_1, el_2 { selection des elements 1 et 2 } 
+  el_x el_y { selection de tous les elements y contenu dans l'élement x } 
+  el_parent > el_fils{ selection de l'elements fls contenu dans l'élement parent } 
+  el_x + el_y{ selection de l'el_y suivante directement el_x } 
+  el_x ~ el_y{ selection de tous les el_y suivent directement el_x } 
+
+  [attr] { cibler un élément qui possède un attribut attr }
+  [attr=valeur] { cibler un élément qui possède un attribut attrdont la valeur est exactement valeur }
+  el_1[attr="valeur"] {propriété: valeur; }
+
+  .class1{ selection de la class1 }
+  el_html.class1 .class2{ selection de l'element html ayant la class1 et class2 }
+
+  #valeur_identifiant { déclarations css }
+  el_1#id{ declaration } 
+
+  [id="valeur_identifiant"] { déclarations } // selecteur d'attribut
+  [class="valeur_identifiant"] { déclarations } // selecteur d'attribut
+
+  div h1:first-child{ declaration css} // premier élement 
+  div p:last-child {declaration css} // second élement 
+  div :nth-child(3){ declaration css } // élement precis dans la DOM
+  div :nth-child(2n){ declaration css } // élements paires, incrémenter par deux
+  div :nth-child(2n-1){ declaration css } // élements impaires, incrémenter par deux
+  div :nth-first-child(3){ declaration css } / :nth-last-child(3)
+  div :only-child() {declaration css} / fils unique
+  a :hover{ survol } / :visited{ lien visité } / :link{ lien non visité } / :active{ lien cliqué à l'instant } :focus { place le focus}
+
+  div ::first-line{première ligne} / ::first-letter{première lettre}
+  div ::before{ content: '';} / ::after{ content: '';}
+
+  */
+
+  COULEUR 
+
+  /*
+    - color  : rgb(red, green, blue); / couleurs personalisées 
+    - color  : rgb(red, green, blue, opacity); / couleurs personalisées 
+    - color  : #FFFFFF; / couleurs personalisées en Hexadecimales 
+    - color  : name; / couleurs prédefinies 
+  */
+
+  TAILLE 
+
+  /* 
+    - px : taille absolue => ne dépend d'aucun élement. 
+    - em : Rélative => dépend de l'élement parent. ( 1em = 1* la taille de l'élement parent )
+    - rem : Rélative => dépend de l'élement root. ( 1em = 1* la taille de l'élement body )
+    - vh ; vw ; vmin ; vmax : taille rélative en pourcentage par rapport à la taille de la fénêtre du navigateur. // Relative to 1% of the height of the viewport*
+    - % : taille rélative en pourcentage de l'élement parent
+  */              
+
+  TYPOGRAPHIE
+
+  /*
+    - font-family: police1, 'police2 xx', police3, police4, sans-serif;
+    - font-size: /rem, px, em /taille absolue
+    - font-size: /xx-smal, x-small, medium, large, x-large, xx-large  /taille relative
+    - font-style: normal, italic /italic
+    - font-weight: bold, normal / gras
+    - text-decoration: blink, underline, line-through, overline, none;
+    - font-variant : small-caps, normal;
+    - text-transform : capitalize, lowercase, uppercase;
+  */
+
+  BACKGROUND 
+
+  /*
+    - background-image: url("nom de l'image.format");
+    - background-attachment: fixed, scroll
+    - background-repeat: no-repeat, repeat, repeat-x, repeat-y
+    - background-position: top right, ...
+    - background: url("soleil.png") fixed no-repeat top right; 
+    - background-color: color;
+    - background-image: linear-gradient(to bottom right, #df4881, #c430d7);
+  */
+
+  BORDURE ET OMBRE 
+
+  /*
+    - border: size color type;
+    - border: 3px blue dashed;
+    - border-top, border-botton, border-left, border-right
+    - border-radius: size;
+    - border-style, color : style, color;
+    - border-width,  height : size; 
+
+    - none : pas de bordure (par défaut)  - double : bordure double
+    - solid : un trait simple             - groove : en relief
+    - dotted : pointillés                 - ridge : autre effet relief
+    - dashed : tirets
+    - inset : effet 3D global enfoncé     - outset : effet 3D global surélevé
+  */
+  
+  /*
+    - box-shadow: 6px 6px 0px black;
+    - text-shadow: 2px 2px 4px black; 
+
+    - le décalage horizontal de l'ombre  - l'adoucissement du dégradé
+    - le décalage vertical de l'ombre    - la couleur de l'ombre
+  */
+
+  DIMENSIONS 
+
+  /*
+    - height : size; min-height, max-height
+    - width : size;  min-width, max-width
+    - line-height
+    
+    - margin : size; 
+    - padding : size;
+    - top; right; button; left / sens ...
+    - overflow : auto; or hidden // coupper le text 
+    - wordwrap : break-word // coupper le text
+  */
+
+  /*
+    heigh / width : longeuer et largeur => utilisable que pour les élements de types block  
+  */
+
+  POSITIONNEMENT 
+
+
+  /*
+    - Le positionnement absolu 
+    - Le positionnement fixe 
+    - Le positionnement relatif 
+
+    - position : absolute, fixed, relative, sticky
+    - top:0px, botton:0px, right:Opx, left:0px
+
+        absolute: positionnement par rapport à l'el. parent (body si l'el. parent n'est pas positionner)
+        static: l'élement ne bougera pas 
+
+
+*/
+
+MEDIA QUERIES 
+
+/* 
+  - device-height : hauteur du périphérique. ; 
+  - device-width : largeur du périphérique. ; 
+  - orientation : orientation du périphérique (portrait ou paysage).;  
+  - media : type d'écran de sortie. Quelques-unes des valeurs possibles : Screen, tv, prnt ...
+
+*/ 
+ 
+/* 
+  @media screen and (min-width: 600px) and (max-width: 800px){
+  
+  }; 
+  
+*/ 
+
+
+
+
+ 
+
+
+
+
+
+
+
