@@ -1,61 +1,13 @@
-
-
-# DJANGO OPERATING DIAGRAM
-"""
-The Django operating diagram, which is based on the MTV (Model-Template-View) architecture,
-involves clear communication between URLs, views, models, templates and other components.
 """
 
-# URLs
-"""
-In Django, URLs are associated with views or view classes that will be executed 
-to process the request associated with this URL.
-
-You define URL schemes in an urls.py file for each Django application
-which maps URLs to corresponding views.
-"""
-
-# Vue
-"""
-The View represents the logic for processing requests and responses.
-It retrieves the necessary data from the models, processes it if necessary, 
-then renders them in the templates to generate the HTTP response. (take an HTTP request and return an HTTP response)
-"""
-
-#Modèles
-"""
-Django models represent the data structure of your application.
-They are defined in models.py files and generally correspond to tables in a relational database.
-
-    ORM (Object-Relational Mapping) :
-    Django provides a powerful ORM that allows you to manipulate database data using Python objects,
-    without having to write SQL queries directly.
-"""
-
-# Templates
-"""
-The Template represents the data presentation and the user interface.
-"""
-
-# START WITH DJANGO: BASICS MANIPULATIONS
-#1
-"""
-1. Create a URL (urls.py), return a view (create views.py) and in the view, use a function helloworld and 
-return Hello world in a html tag with HttpResponse.
-
-2.Create a Templates directory (Default django directory for UI templates), and create a index.html file inside 
-and in your view file, return this html file with render.
-
-In your view with render(), you can return files, and others python modules data to a templates files 
-#return render(request, 'index.html', context={'date': date})
 
 
--by default django looks for Templates and Statics (name known by Django)folder only in applications. 
-if you don't create an application, You can manually create and add the path of a directory to the setting.py 
+-by default django looks for Templates and Statics (name known by Django)folder only in applications.
+if you don't create an application, You can manually create and add the path of a directory to the setting.py
 file so that it can be found by Django
 
 STATICFILES_DIRS[
-    os.path.join(BASE_DIR, 'directory/static')  => django will search and in application frst 
+    os.path.join(BASE_DIR, 'directory/static')  => django will search and in application frst
     (attention with name conflict)
 ]
 
@@ -67,7 +19,7 @@ TEMPLATES[
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'myapp',  #Alwas add the App you create here, 
+    'myapp',  #Alwas add the App you create here,
 ]
 
 Conflicts
