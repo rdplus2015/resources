@@ -53,3 +53,6 @@
 	 git fetch // recuperer les modifications du depot distant 
 	 git pull // appliquer les modifs au depots local
 	 
+
+
+
