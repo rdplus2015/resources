@@ -20,6 +20,15 @@
       },
   ]
 ```
+### Best Practices for Using Static Files in Django
+
+### `{% static %}` Tag
+Use the `{% static %}` tag to reference static files in your Django templates. This ensures that the URLs of static files are properly managed, including in production.
+
+Example:
+```html
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+```
 
 ### STATIC_URL, MEDIA_URL, STATICFILES_DIRS
 ```python

@@ -1,10 +1,3 @@
-"""
-
-
-
-Conflicts
-    Templates/appname/index.file appname_file
-"""
 
 """
 href="{%static 'css/style.css' %} "  path towards static => important for migration | {% load static %} 
