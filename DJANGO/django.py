@@ -2,26 +2,6 @@
 
 
 
--by default django looks for Templates and Statics (name known by Django)folder only in applications.
-if you don't create an application, You can manually create and add the path of a directory to the setting.py
-file so that it can be found by Django
-
-STATICFILES_DIRS[
-    os.path.join(BASE_DIR, 'directory/static')  => django will search and in application frst
-    (attention with name conflict)
-]
-
-TEMPLATES[
-    'DIRS': [os.path.join(BASE_DIR, 'docblog/templates')], # for templates
-    #'DIRS':['absolute_path_of_the_directory']
-    # NEW VERSION:  'DIRS': [BASE_DIR/"Templates"],
-]
-
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'myapp',  #Alwas add the App you create here,
-]
-
 Conflicts
     Templates/appname/index.file appname_file
 """

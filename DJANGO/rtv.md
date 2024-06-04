@@ -48,7 +48,7 @@ def index(request):
 from django.shortcuts import render
 
 def index(request):
-    return render(request, "index.html", context={"valeur": 5})
+    return render(request, "index.html", context={"value": 5})
 ```
 ```html 
 <h1>The value associated with the key "value" is {{ value }}</h1>
