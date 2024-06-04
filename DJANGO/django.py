@@ -1,33 +1,8 @@
 
-"""
-href="{%static 'css/style.css' %} "  path towards static => important for migration | {% load static %} 
-in the begging of the page to be able to call {% %} 
-# be careful with name conflict when we use many static folder in different application => rename css file or use
-sub folder
-"""
-
 # ORM
-"""
-Django models allow us to link with our application's database. For this we use an ORM (Object Relational Mapping) 
-which will allow us, with Python code, to represent our database and to create, update and delete entries 
-in our database.
 
-To create a model, we use object-oriented programming by creating a class that inherits from the Model class of the 
-django.db.models module.
 
-1. Create table for the application
-lass BlogPosts(models.Model): #APP DB TABLE
-    title = models.CharField(max_length=255) # DB FIELDS OR COLUMN 
-    status = models.BooleanField(default=False) # DEFAULT VALUE 
-    date = models.DateField(blank=True) # ALLOW BLANK ENTRY 
-
-2. Make migration 
-file that allows you to write to the database. contains history in the database and also allows 
-to recreate the database structure
-
-# python manage.py makemigrations appname => make migrations
-# python manage.py migrate appname => apply migrations in your database 
-# python manage.py sqlmigrate appname migrationname => apply migrations in your database and show sql code 
+"""""
 python manage.py shell => use interactive shell (not python interpreter)
 
 3. create object
@@ -39,7 +14,7 @@ python manage.py shell => use interactive shell (not python interpreter)
 >> 
 """
 
-# ORM (SHELL)
+
 """
     - model_name.objects.create(attr = 'value') / create automatically the object (don't need to use save() methode )
     - class_name.objects.get.all() / get all objects
