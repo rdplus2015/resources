@@ -7,17 +7,17 @@ When you move your project folder to a server or other location, the virtual env
 in your project folder) does not automatically move with it. Only files and directories present in your project folder 
 will be moved. However, you can easily recreate the virtual environment on the new system with the requirement file.
 
-### create a Python environment in the folder 
+### create a Python environment in the folder
 - `python3.xx -m venv .envname`
 
 ### activate the environment
-- `source .envname/bin/activate` 
+- `source .envname/bin/activate`
 
 ### deactivate the environment
-- `deactivate` 
+- `deactivate`
 
 ### delete the environment
-- `rm -rf .env` 
+- `rm -rf .env`
 
 # Django Installation
 
@@ -32,5 +32,6 @@ will be moved. However, you can easily recreate the virtual environment on the n
 - `django-admin startproject project_name` -  initialize a new project with Django structure
 - `django-admin --help` -  get help on django-admin
 - `python manage.py runserver` -  run the server
-- `python manage.py migrate` - make the first migration 
+- `python manage.py migrate` - make the first migration
 
+[Documentation](https://docs.djangoproject.com/en/5.0/intro/install/)

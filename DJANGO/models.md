@@ -29,4 +29,21 @@ python manage.py migrate
 `URLField` to store URLs.
 [Documentations](https://docs.djangoproject.com/fr/5.0/ref/models/fields/#field-types)
 
+## Properties and Method overloading
+Adding properties (methods and attributes) to our classes allows us to not always 
+Create fields to display personalized messages or items.
 
+```python
+
+@property 
+def publish_string(self):
+    if self.published:
+        return "the article was published"
+    return "Article not found"
+
+#  Method overloading
+def save(self, *args, **margs):
+    if not self.slug:
+        self.slug = slugify(self.title)
+    super().save(*args, **margs)
+```
