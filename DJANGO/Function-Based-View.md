@@ -1,4 +1,4 @@
-# Function Based View
+# Function-Based View
 - A view is simply a Python function that receives an HTTP request as input and returns an HTTP response as output.
 
 ```python
