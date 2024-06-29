@@ -1,0 +1,58 @@
+1. Configuration and Initialisation 
+
+	- git config --global user.name "user_namme" //  set uername 
+	- git config --global user.email"my@email.com" // set email 
+	- git config --global --list // show all comfig
+	- git / git --help  // command and option
+
+	- git init // initialisation of a new repository  will create a new hidden folder that content all of your modifications and reposiotory informations)
+	- git config --global init.defaultBranch <nom> // Initialisation of the default name of the master branch
+	- git branch -m main // cahnge de default name(master) to main 
+
+2. 
+
+	- .git folder => all historic and informations about your git repository, remove the will delete all historic of your repository
+	- git init // initialiser un depot git
+	- git sttus // donne l'etat actuel du repository
+	
+	/* index zone est un emplacement où les dossiers et fichiers sont placer afin d etre commiter et conituer le depot, une zone temporaire qui permet d regrouper les infos et le selectionner afin de le regrouper dans un seul  et meme paquet appeler commit qui lui meme enregistrer dans notre historique de depots */
+
+	- git add xxx // add a file in the index zone for be commit  
+	- git add . // add all modified files in the index zone ready for be commited 
+	- git reset // remove files from index 
+	- git commit -m"enter your message here" // create a commit 
+	- gt diff xxx or git diff  // see the diffence between the comited version and actual version. see what modification has been made 
+	- git diff --cash // to see it after indexation
+
+	
+
+3. Historique d'un depot git
+
+	/* ensemble de ommit relier par des pointeurs => ils constituents une branche */
+
+	- git log // affiche l'historique de nos commits qui sont avant le tague head 
+	- git log -n 2 // selectionner le nombre de commit a afficher
++	- git show xxx SHA1 // afficher les contenues donc les modifications ajouter a nos commit 
+	- git checkout xxxSHA1 // revenir vers un ancien commit
+	- git checkout master // revenir au dernier commit 
+	- git tag nom_du_tag // ajouter un tag a un commit pour identifier et se deplacer  plus facilement 	
+	- git tag --delete nom_du_tag can take -m"message"
+	- git tag // lister l'ensemble de tag fait par nous meme 
+
+	/* le pointeur head nous indique le commit dans lequel  nous sommes actuellements*/
+	/* le pointeur master indique le dernier commit il se deplace donc/
+	
+	/* SSH => ssh-keygen // cat ~/.ssh/id_rsa.pub  */
+	 git clone #lien -> cloner un depot distant 
+	 git remote -v // afficher le pointeur et les remotes, elle indique le depot qui sert d origine a notre depot cloner ou local 
+	 git remote add  origin ## chemin du depot 
+	 git remote set-url origin <ssh-url> // update the origin remote path for use ssh
+
+	 git push -u origin master // ousser vers le depot distant // dont push tags
+	 push origin --tags or #tag name
+	 git fetch // recuperer les modifications du depot distant 
+	 git pull // appliquer les modifs au depots local
+	 
+
+
+
