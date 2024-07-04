@@ -27,7 +27,7 @@ python manage.py migrate
 `EmailField` to store email addresses.
 `DateField` and DateTimeField to store dates.
 `URLField` to store URLs.
-[Documentations](https://docs.djangoproject.com/fr/5.0/ref/models/fields/#field-types)
+
 
 ## Properties and Method overloading
 Adding properties (methods and attributes) to our classes allows us to not always 
@@ -47,3 +47,4 @@ def save(self, *args, **margs):
         self.slug = slugify(self.title)
     super().save(*args, **margs)
 ```
+[Documentations](https://docs.djangoproject.com/fr/5.0/ref/models/fields/#field-types)

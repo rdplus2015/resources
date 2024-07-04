@@ -481,3 +481,5 @@ urlpatterns = [
 
 Opt for Django forms for robust validation, model integration, and security needs, and prefer HTML forms for specific requirements in design, client-side interaction, or simplicity when Django is not involved. 
 Use Model Forms when you need to create or update database records.
+
+[Documentation](https://docs.djangoproject.com/en/5.0/topics/forms/)
