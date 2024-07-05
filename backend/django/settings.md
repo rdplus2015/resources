@@ -111,7 +111,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 ### Setup 
 
-```python
+```bash
     pip install django-environ
 ```
 
