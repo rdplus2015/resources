@@ -103,13 +103,17 @@ MEDIA_ROOT = BASE_DIR / 'media'
   - *Description:* Forces the browser to respect the declared content type.
   - *Syntax:* `SECURE_CONTENT_TYPE_NOSNIFF=True`
   - *Best Practice:* Enable to prevent MIME sniffing attacks.
-
-## Other Settings
-
+    
 - **DATABASE_URL**
   - *Description:* Database connection URL.
   - *Syntax:* DATABASE_URL=postgres://username:password@localhost/db_name
   - *Best Practice:* Use a unique and secure connection URL for the database.
+
+### Setup 
+
+```python
+    pip install django-environ
+```
 
 ```text
     # Environment Variables Configuration (.env)
@@ -126,9 +130,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
     
     # Database Configuration
     DATABASE_URL=postgres://username:password@localhost/db_name
-```
-```python
-    pip install django-environ
 ```
 
 ```python
@@ -158,4 +159,47 @@ MEDIA_ROOT = BASE_DIR / 'media'
     
     # Other Settings
     # Add other custom settings here...
+```
+
+# .gitignore template
+
+```text
+# Ignore Django migration files
+*/migrations/*.pyc
+*/migrations/*.py
+
+# Ignore compiled Python files
+*.pyc
+__pycache__/
+
+# Ignore local SQLite database
+*.sqlite3
+
+# Ignore log files
+*.log
+
+# Ignore macOS specific hidden files
+.DS_Store
+
+# Ignore JetBrains IntelliJ IDEA specific directory
+.idea/
+
+# Ignore Visual Studio Code specific directory
+.vscode/
+
+# Ignore Python and JavaScript dependency directories
+venv/
+env/
+node_modules/
+
+# Ignore test coverage files
+htmlcov/
+.coverage
+
+# Ignore compiled static files directory
+/static/
+
+# Ignore environment configuration files
+/.env/ # example 
+.config_env # example
 ```
