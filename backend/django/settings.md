@@ -127,6 +127,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
     # Database Configuration
     DATABASE_URL=postgres://username:password@localhost/db_name
 ```
+```python
+    pip install django-environ
+```
 
 ```python
     import os
