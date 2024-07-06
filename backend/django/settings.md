@@ -112,53 +112,59 @@ MEDIA_ROOT = BASE_DIR / 'media'
 ### Setup 
 
 ```bash
-    pip install django-environ
+pip install django-environ
 ```
 
 ```text
-    # Environment Variables Configuration (.env)
+# Environment Variables Configuration (.env)
     
-    # Security Parameters
-    DEBUG=True
-    SECRET_KEY=mysecretkey123
-    ALLOWED_HOSTS=localhost,127.0.0.1
-    SECURE_SSL_REDIRECT=False
-    SESSION_COOKIE_SECURE=False
-    CSRF_COOKIE_SECURE=False
-    SECURE_BROWSER_XSS_FILTER=True
-    SECURE_CONTENT_TYPE_NOSNIFF=True
+# Security Parameters
+DEBUG=True
+SECRET_KEY=mysecretkey123
+ALLOWED_HOSTS=localhost,127.0.0.1
+SECURE_SSL_REDIRECT=False
+SESSION_COOKIE_SECURE=False
+CSRF_COOKIE_SECURE=False
+SECURE_BROWSER_XSS_FILTER=True
+SECURE_CONTENT_TYPE_NOSNIFF=True
     
-    # Database Configuration
-    DATABASE_URL=postgres://username:password@localhost/db_name
+# Database Configuration
+DATABASE_URL=postgres://username:password@localhost/db_name
 ```
 
 ```python
-    import os
-    import environ
-    
-    # Environment Initialization
-    env = environ.Env()
-    
-    # Load the .env file
-    environ.Env.read_env()
-    
-    # Django settings configuration with django-environ
-    DEBUG = env.bool('DEBUG', default=False)
-    SECRET_KEY = env('SECRET_KEY')
-    ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
-    SECURE_SSL_REDIRECT = env.bool('SECURE_SSL_REDIRECT', default=False)
-    SESSION_COOKIE_SECURE = env.bool('SESSION_COOKIE_SECURE', default=False)
-    CSRF_COOKIE_SECURE = env.bool('CSRF_COOKIE_SECURE', default=False)
-    SECURE_BROWSER_XSS_FILTER = env.bool('SECURE_BROWSER_XSS_FILTER', default=True)
-    SECURE_CONTENT_TYPE_NOSNIFF = env.bool('SECURE_CONTENT_TYPE_NOSNIFF', default=True)
-    
-    # Database Configuration
-    DATABASES = {
-        'default': env.db(),
-    }
-    
-    # Other Settings
-    # Add other custom settings here...
+import os
+import environ
+
+# Initialize environ
+env = environ.Env()
+
+# Load environment variables from .env file
+environ.Env.read_env('.yourfilename')
+
+# DEBUG mode
+DEBUG = env.bool('DEBUG', default=False)
+
+# Secret key
+SECRET_KEY = env('SECRET_KEY')
+
+# Allowed hosts
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
+
+# Security settings
+SECURE_SSL_REDIRECT = env.bool('SECURE_SSL_REDIRECT', default=False)
+SESSION_COOKIE_SECURE = env.bool('SESSION_COOKIE_SECURE', default=False)
+CSRF_COOKIE_SECURE = env.bool('CSRF_COOKIE_SECURE', default=False)
+SECURE_BROWSER_XSS_FILTER = env.bool('SECURE_BROWSER_XSS_FILTER', default=True)
+SECURE_CONTENT_TYPE_NOSNIFF = env.bool('SECURE_CONTENT_TYPE_NOSNIFF', default=True)
+
+# Database configuration
+DATABASES = {
+    'default': env.db(),
+}
+
+# Other Settings
+    # Add other custom settings here...     
 ```
 
 # .gitignore template
