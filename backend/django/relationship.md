@@ -171,3 +171,5 @@ child1.delete()
 - `Company and Employees` : A company can have multiple employees, but each employee belongs to a single company
 - `School and Students` : A school can have multiple students, but each student is associated with a single school.
 - `Author and Books` : An author can write multiple books, and the reverse relationship allows access to the books of an author.
+
+[Documentation](https://docs.djangoproject.com/en/5.0/topics/db/models/)
