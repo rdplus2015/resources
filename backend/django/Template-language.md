@@ -51,7 +51,7 @@
 ## Comment
 ```python
 {% comment %}
-    This is a comment (template comment )
+    This is a comment (template comment)
 {% endcomment %}
 ```
 
@@ -59,7 +59,7 @@
 
 ## Template Inclusion and Inheritance
 - ### Inheritance
-  - Define a parent template:
+  - Inherit a parent template:
 ```python
 {% extends "base.html" %}
 ```
@@ -126,5 +126,37 @@
     {{ form.field_name.label_tag }} {{ form.field_name }}
     <button type="submit">Submit</button>
 </form>
+```
+
+```html
+<body>
+   <h2> Sign Up </h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div>
+            <label for="id_email">Email:</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="error">{{ form.email.errors }}</div>
+            {% endif %}
+        </div>
+        <div>
+            <label for="id_password1">Password:</label>
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+                <div class="error">{{ form.password1.errors }}</div>
+            {% endif %}
+        </div>
+        <div>
+            <label for="id_password2">Confirm Password:</label>
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+                <div class="error">{{ form.password2.errors }}</div>
+            {% endif %}
+        </div>
+        <button type="submit">Sign Up</button>
+    </form>
+</body>
 ```
 [Documentation](https://docs.djangoproject.com/en/5.0/topics/templates/)

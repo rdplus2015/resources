@@ -51,6 +51,10 @@ class SimpleForm(forms.Form):
             raise forms.ValidationError('Email must be from example.com domain')
         return email
 ```
+```text
+Field Validation: Validates a single field at a time with clean_<fieldname>(). Used for specific checks on individual fields.
+Global Validation: Validates multiple fields together with clean(). Used for complex checks involving multiple fields.
+```
 
 - ### Global Validation:
 ```python
@@ -129,6 +133,37 @@ def example_view(request):
         init_values=["date"] = datetime.today()
         form = ExampleForm(initial=init_values)
     return render(request, 'example_template.html', {'form': form})
+```
+```python
+
+class SignUp(View):
+    template_name = 'registration/signup.html'
+
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect(self.get_redirect_url())
+        form = SignUpForm()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        if request.user.is_authenticated:
+            return redirect(self.get_redirect_url())
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect(self.get_success_url())
+        return render(request, self.template_name, {'form': form})
+
+    def get_success_url(self):
+        next_url = self.request.GET.get('next')
+        if next_url and url_has_allowed_host_and_scheme(next_url, allowed_hosts={self.request.get_host()}):
+            return next_url
+        return reverse('dashboard')
+
+    def get_redirect_url(self):
+        return reverse('dashboard')
+
 ```
 ## Using ModelForm
 - ### ModelForm for Create and Update:
