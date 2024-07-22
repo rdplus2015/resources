@@ -110,6 +110,9 @@ class YourListView(ListView):
 
 #### **Key Methods**
 - `get_queryset(self)`: Return the list of items for this view.
+- `get_context_data(**kwargs)`: Adds additional data to the template context.
+- `paginate_queryset(queryset, page_size)`: Handles pagination of the queryset.
+
 
 ### **Detail View: `DetailView`**
 
@@ -129,6 +132,7 @@ class YourDetailView(DetailView):
 
 #### **Key Methods**
 - `get_object(self, queryset=None)`: Retrieves the object.
+- `get_context_data(**kwargs)` : Adds additional data to the template context.
 
 ### **Form View: `FormView`**
 
@@ -171,6 +175,14 @@ class YourCreateView(CreateView):
 #### **Key Attributes**
 - `model`: The model to create.
 - `fields`: Fields to display in the form.
+- 
+#### **Key Methods**
+- `get_form_class()` : Returns the form class used by the view.
+- `get_form(self, form_class=None)`: Returns the form use by the class 
+- `get_form_kwargs()` : Returns additional arguments to pass to the form.
+- `form_valid(form)` : Handles the case where the form is valid.
+- `get_success_url()` : Returns the URL to redirect to after a successful form submission.
+
 
 ### **Update View: `UpdateView`**
 
@@ -189,6 +201,14 @@ class YourUpdateView(UpdateView):
 - `model`: The model to update.
 - `fields`: Fields to display in the form.
 
+#### **Key Methods**
+- `get_form_class()` : Returns the form class used by the view.
+- `get_form(self, form_class=None)`:Creates an instance of the form using the form class returned by get_form_class()
+- `get_form_kwargs()` : Returns additional arguments to pass to the form.
+- `form_valid(form)` : Handles the case where the form is valid.
+- `get_success_url()` : Returns the URL to redirect to after a successful form submission.
+- `get_object()`: Returns the object to be updated.
+
 ### **Delete View: `DeleteView`**
 
 #### **Example**
@@ -205,6 +225,9 @@ class YourDeleteView(DeleteView):
 #### **Key Attributes**
 - `model`: The model to delete.
 - `success_url`: URL to redirect upon successful deletion.
+
+- `get_object()` : Returns the object to be deleted.
+- `get_success_url()`: Returns the URL to redirect to after a successful deletion.
 
 ## **Mixins**
 
@@ -246,6 +269,7 @@ urlpatterns = [
 2. **Override `get_queryset`** to filter or modify the data returned.
 3. **Override `dispatch`** for request-level customization.
 4. **Use Mixins** to extend functionality like authentication and authorization.
+
 
 ## **Common Methods in CBVs**
 
