@@ -7,8 +7,6 @@ including the essentials of OOP, the essentials of modules and packages, the exc
 advanced operations on strings, list comprehensions, lambdas, generators, closures, and file processing.
 """
 
-# Module 1
-# Modules, Packages and PIP;
 
 # Module 2
 # Strings, string and list methods, and exceptions;
@@ -22,214 +20,7 @@ advanced operations on strings, list comprehensions, lambdas, generators, closur
 
 
 # ======= MODULE 1 ======= #
-"""
 
-Modules, Packages and PIP
-
-In this module, you will learn about:
-
-- importing and using Python modules;
-- using some of the most useful Python standard library modules;
-- constructing and using Python packages;
-- PIP (Python Installation Package) and how to use it to install and uninstall ready-to-use packages from PyPI.
-
-"""
-
-#  MODULE USING AND INVOCATION #
-
-"""
-    a module is a file containing Python definitions and statements (var & func).
-    instruction can be anywhere but must be placed before the first use of the module's entities 
-    (Instances, methods ...)
-"""
-
-"""
-import sys
-
-from name in dir(module_name): 
-    print(name) 
-# Check the content of a random module 
-"""
-
-"""
-import sys  # Module invocation : syntax 1 ==> import all entities from sys module 
-def exit():
-    print('i wanna exit')
-
-exit()
-sys.exit() # module using 
-"""
-
-"""
-# from sys import exit  # Module invocation : syntax 2 ==> import only exit entity from sys module 
-def exit():
-    print('i wanna exit')
-
-exit()
-exit() # function from sys module
-"""
-
-"""
-- The sys prefix can distinguish our own function and the sys entity (exit), is having his own namespace
-- We can specify the exact entities from the module that we are interested Here, 
-  we don't need to specify the namespace, Your own code has the priority if somthing has the very same name with 
-  an entity, imported entities will be overwritten
-"""
-
-"""
-from sys import * // you don't have to put the namespace with this syntax, but all entities from a random module 
-are imported and can make a lot of conflicts in our code 
-"""
-
-"""
-# You can use alias for handle module with long name 
-- import sys as s // handle module with long name
-- from sys import exit as ex
-- can causes lower readability  "
-"""
-
-"""
-if __name__ == '__main__':
-    print('module executed in the main file')
-    # _my_super var_ = 'hi' # by convention doubles underscore tell to the module user to don't modify the var (warning)
-    # !usr/bin/env python3  // tell  some environment to use python -- for universal audience
-    # use  three quote to explain what your module do 
-else :
-    print('module executed in the module file')
-"""
-
-# SYS MODULE
-
-"""
-import sys
-sys.path.append('..//module-test') # add upper directory in the path variable
-sys.path.append('module-test') # add directory in the path variable (same directory with main file) and import the 
-module inside the folder after.
-import module-test1  //  importation of the module inside the folder 
-absolute_path = 'c\\user...' # path from the hard disk 
-"""
-
-# Math module
-
-"""
-# ceil() : return nearst integer // print(math.ceil(2.9))
-# floor() :  return the nearest integer never greater than the number //
-# trunc() : remove the decimal part et return the integer // same than round()
-# factorial() : it's the multiplication of all positive integer  less than or equal to the given number //
-# sqrt() : return the square root of a number //  return float
-# hypot() :  return the hypotenuse // two arguments 
-"""
-
-# random Module
-
-"""
-# random.seed() // The choice of seed determines the "base" of the random sequence, and a different seed will lead to a 
-different sequence of random numbers.
-# random.random()  and # random.randit() 
-In summary, random.randint(a, b) generates random integers in a specified interval, 
-while random.random() generates random floating point numbers in the interval [0.0, 1.0).
-
-# random.choice(sequence) // choosing from a sequence and can take one element two times
-# random.sample() // take a sequence and number of element that must be taken without duplicate
-# print(random.randrange(0, 10, 4))  produces an integer number x, which is taken from the range start ≤ x < stop with 
-step step. Note: the start argument defaults to 0 and the step argument defaults to 1
-It can randomly decide to return elements with indexes 0 and 1, and you will get ['Martin', 'John']. However, 
-it can also randomly pick indexes 0 and 2, in which case you will get ['Martin', 'Martin'].  
-"""
-
-# platform Module
-
-
-""" 
-# platform.platform() and # platform.system() 
-In summary, platform.system() simply returns the name of the operating system, 
-while platform.platform() returns a text string describing the full platform in more detail, including additional 
-information such as system version operating.
-
-# platform.platform(aliased = False, Terse = False) // return alternative test if it fund or standar text.  
-return brief form (terse)
-# platform.machine() This function returns the hardware machine type, usually as a text string representing 
-the processor architecture (for example, "x86_64" for a 64-bit architecture or "armv7l" for an ARM architecture).
-# platform.processor() This function returns the processor name as a text string.
-
-# platform.py_implementation() // the implementation of your python version
-# platform.py_version_tuple() // the version of your python
-
-"""
-
-"""
-    In the previous video, we've discussed platform.python_version_tuple(), which returns your Python version 
-    as a 3-element tuple, for example: ('3', '8', '12') // There's also another function that looks similar: 
-    platform.version(). This function, in turn, returns your system's release version as a single string, 
-    for example: #24~20.04.1-Ubuntu SMP Mon Sep 12 06:14:01 UTC 2022
-    Keep in mind not to confuse these two functions for the PCAP exam!
-"""
-
-# PYTHON PACKAGES
-
-"""
-- a package is a folder that content similar modules. for create it we just to create a folder and name it 
-- __init__.py : file to initialize a package (optional since py3)
-- import folder1.folder_b.folder3.modulename  // put namespace or alias
-- from folder1.folder_b.folder3.modulename import my_fun // don't need to put namespace 
-"""
-
-"""
-import sys
-
-# method 1 
-sys.path.append('pkg/modules5_6')  # add to the path variable
-import module5
-from module6 import b
-
-print(module5.a)  # Need a name space
-print(b)  # don't need the name space
-print('\n')
-
-# method 2
-import pkg.modules5_6.module5
-from pkg.modules5_6.module6 import b
-
-print(pkg.modules5_6.module5.a)
-print(b)
-print('\n')
-"""
-
-"""
-# methode 3  //  very bad way, don't import the modules inside the package 
-import pkg.modules5_6
-print(pkg.modules5_6.module5.a)
-"""
-
-# == PYPI / PIP  == #
-
-"""
-pip help // pip help operation (pip help install) 
-pip list // If you want to know what Python packages have been installed so far
-pip show package_name // command that can tell you more about any of the installed packages  (dependencies)
-
-The power of pip comes from the fact that it’s actually a gateway to the Python software universe. Thanks to that, 
-you can browse and install any of the hundreds of ready-to-use packages gathered in the PyPI repositories. 
-
-pip search anystring // search through PyPI in order to find a desired package. 
-
- --user : install to user account and not in the system like admin  // pip install pygame  :  pip install --user pygame
- pip show pygame  // pip list pygame 
-
- pip install -U package_name // update a locally installed package
- pip install package_name==package_version / pip install pygame==1.9.2 //  install a user-selected version of a package
- pip uninstall package_name // pip uninstall pygame
-
-"""
-
-"""
-    This content is outside the scope of the PCAP examination, but it may be very useful if you work with Python. I’ve
-    mentioned that there are lots of modules written for Python by both professional Python developers and Python 
-    enthusiasts. But how can you find out what modules are available? Where can you find their code? One of the best 
-    sources of Python modules is the Python Package Index, or PyPI.It is available at https://pypi.org/.
-
-It is a repository full of Python modules, you can browse them and download them as you need. Have fun!
-"""
 
 # ======= MODULE 2 ======= #
 
@@ -435,6 +226,18 @@ def return_bigger(a,b):
 
 #Exception as Object
 #Create Own Exception
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # ======= MODULE 3 ======= #
