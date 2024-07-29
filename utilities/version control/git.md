@@ -310,4 +310,67 @@
 - Use `merge` to combine branches with full context.
 - Use `rebase` to create a linear, cleaner history.
 
+
+## Revert to a Previous Commit
+
+Reverting to a previous commit can be done if you want to discard recent changes and start from a specific commit.
+
+### Steps to Revert to a Previous Commit
+
+1. **Find the Commit Hash**
+
+   First, identify the hash of the commit you want to revert to. You can use the following command to list your commits:
+
+   ```bash
+   git log --oneline
+   ```
+2. **Checkout to the Specific Commit** 
+
+   Once you have identified the commit hash, you can check out to that specific commit using:
+   ```bash
+   git checkout <commit-hash>
+   ```
+3. **Create a New Branch from the Previous Commit**
+
+   It is a good practice to create a new branch from this commit so that you can continue working from this point:
+
+   ```bash
+   git checkout -b <new-branch-name>
+   ```
+
+## Remove a Commit That Has Not Been Pushed 
+
+If you've committed changes locally that you don't want to keep, you can remove them before pushing.
+
+### Steps to Remove the Last Commit
+
+1. **Reset to the Previous Commit**
+
+   You can use the `git reset` command to remove the last commit:
+
+   ```bash
+   git reset --soft HEAD~1
+   ```
+
+   -  use `--soft` keeps your changes staged.
+   -  Use `--mixed` to unstage the changes.
+   -  Use `--hard` to discard the changes completely.
+
+   Warning: Using `--hard` will permanently delete your changes.
+
+2. **Push the Changes to GitHub**
+
+   If you have already pushed the commit to GitHub and want to remove it, you'll need to force push the changes:
+
+   ```bash
+   git push origin <branch-name> --force
+   ```
+
+### Safety Tips
+
+- Use `git reflog` to recover from accidental resets.
+- Always backup important changes before performing destructive operations.
+- Communicate with your team when rewriting commit history in shared repositories.
+- Use `BFG Repo-Cleaner` or `git filter-branch` to rewrite Git history.
+
 This cheat sheet covers the essential Git commands and concepts you need to know as a developer. For more detailed information, refer to the Git documentation or use `git help <command>`.
