@@ -79,6 +79,56 @@ p:first-of-type {
 }
 ```
 
+### Pseudo-Elements Overview
+
+Pseudo-elements in CSS allow you to style specific parts of an element's content, such as the first letter, line, or content before/after the element. They are identified by a double colon (`::`).
+
+### Commonly Used Pseudo-Elements
+
+- **`::before`**  
+  Inserts content before the content of an element.
+  ```css
+  p::before {
+    content: "Note: ";
+    color: red;
+  }
+  ```
+
+- **`::after`**  
+  Inserts content after the content of an element.
+  ```css
+  p::after {
+    content: " (end)";
+    color: blue;
+  }
+  ```
+
+- **`::first-line`**  
+  Styles the first line of an element's text.
+  ```css
+  p::first-line {
+    font-weight: bold;
+  }
+  ```
+
+- **`::first-letter`**  
+  Styles the first letter of an element's text.
+  ```css
+  p::first-letter {
+    font-size: 200%;
+    color: green;
+  }
+  ```
+
+- **`::selection`**  
+  Styles the portion of text that is selected by the user.
+  ```css
+  ::selection {
+    background: yellow;
+    color: black;
+  }
+  ```
+
 ## Box Model
 ### Display Types
 
@@ -163,6 +213,48 @@ Ideal for margins, depending on the element or parent.
 
 - **rem**: Relative to the font size defined in the body
 - **vh** and **vw** : Relative to the viewport's height and width
+
+
+
+### Custom Fonts with `@font-face`
+
+The `@font-face` rule allows you to load custom fonts on your website. You can specify the font files and define how they should be used in your CSS.
+
+### Example
+```css
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('mycustomfont.woff2') format('woff2'),
+         url('mycustomfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; /* optional: with a shorter block period.*/
+}
+```
+### Google Fonts Best Practices
+
+- Preconnect: Use the `rel="preconnect"` attribute to establish early connections to the Google Fonts servers, speeding up the font loading.
+
+- Preload: Consider preloading the font files to reduce loading times
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- Manually Adding font-display to Google Fonts -->
+ <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+
+```
+#### Using Local Fonts Before Google Fonts
+```css
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Roboto'), url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap') format('woff2');
+}
+```
 
 ## Background 
 
@@ -446,5 +538,7 @@ Ideal for margins, depending on the element or parent.
    - [Can i use](https://caniuse.com/)
    
    - [Autoprefixer](https://autoprefixer.github.io/)
+   
+   - [Fontsquirrel](https://www.fontsquirrel.com/)
 
    
