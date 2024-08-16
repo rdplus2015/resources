@@ -352,6 +352,273 @@ machines can only speak in binary
   ```
   *Example:* Show only the first 10 results for `report.txt`.
 
----
 
-This cheatsheet provides a comprehensive overview of the `find` and `locate` commands, complete with practical examples for each usage scenario.
+# Linux File Permissions Cheatsheet
+
+## Basic Concepts
+
+- **File Permissions**: Each file or directory in Linux has associated permissions that determine who can read, write, or execute the file.
+
+- **User Types**:
+  - **Owner (u)**: The user who owns the file.
+  - **Group (g)**: Users who are members of the file's group.
+  - **Others (o)**: All other users on the system.
+
+- **Permission Types**:
+  - **Read (r)**: Permission to read the file or list the directory contents.
+  - **Write (w)**: Permission to modify the file or directory.
+  - **Execute (x)**: Permission to execute the file (if it’s a script or binary) or access the directory.
+
+## Viewing Permissions
+
+- **View file permissions**:
+  ```bash
+  ls -l
+  ```
+  *Example:* Displays a long listing of directory contents, including permissions, owner, group, and other details.
+
+  Output:
+  ```
+  -rwxr-xr-- 1 user group 1024 Aug 16 08:00 myscript.sh
+  ```
+  *Explanation:* The first character represents the file type (`-` for regular files, `d` for directories). The next nine characters are the permissions for owner, group, and others.
+
+## Changing Permissions
+
+- **Using `chmod` command**:
+  - **Change permissions using symbolic mode**:
+    ```bash
+    chmod u+rwx,g+rx,o-r myfile.txt
+    ```
+    *Example:* Grants read, write, and execute permissions to the owner, read and execute permissions to the group, and removes read permission for others.
+
+  - **Change permissions using numeric mode (octal)**:
+    ```bash
+    chmod 755 myscript.sh
+    ```
+    *Example:* Sets the permissions to `rwxr-xr-x` (owner can read, write, execute; group and others can read and execute).
+
+  - **Make a file executable**:
+    ```bash
+    chmod +x myscript.sh
+    ```
+    *Example:* Adds execute permissions to the file for everyone.
+
+  - **Remove write permission for group and others**:
+    ```bash
+    chmod go-w myfile.txt
+    ```
+    *Example:* Removes write permission for the group and others.
+
+## Changing Ownership
+
+- **Using `chown` command**:
+  - **Change file owner**:
+    ```bash
+    sudo chown newowner myfile.txt
+    ```
+    *Example:* Changes the owner of `myfile.txt` to `newowner`.
+
+  - **Change file owner and group**:
+    ```bash
+    sudo chown newowner:newgroup myfile.txt
+    ```
+    *Example:* Changes the owner to `newowner` and the group to `newgroup`.
+
+  - **Change group ownership**:
+    ```bash
+    sudo chgrp newgroup myfile.txt
+    ```
+    *Example:* Changes the group ownership of `myfile.txt` to `newgroup`.
+
+## Special Permissions
+
+- **Setuid (Set User ID)**:
+  - **Usage**:
+    ```bash
+    chmod u+s /path/to/file
+    ```
+    *Example:* Allows a file to be executed with the permissions of the file owner.
+
+- **Setgid (Set Group ID)**:
+  - **Usage**:
+    ```bash
+    chmod g+s /path/to/directory
+    ```
+    *Example:* New files created within the directory inherit the group of the directory.
+
+- **Sticky Bit**:
+  - **Usage**:
+    ```bash
+    chmod +t /path/to/directory
+    ```
+    *Example:* Ensures that only the file owner can delete or rename the files in the directory.
+
+## Viewing Special Permissions
+
+- **View special permissions**:
+  ```bash
+  ls -l /path/to/file
+  ```
+  *Example:* Look for `s`, `S`, or `t` in the permission field:
+  ```
+  -rwsr-xr-x 1 root root 12345 Aug 16 08:00 /usr/bin/sudo
+  drwxrwxrwt 2 root root 4096 Aug 16 08:00 /tmp
+  ```
+
+## Recursively Changing Permissions
+
+- **Using `chmod` recursively**:
+  ```bash
+  chmod -R 755 /path/to/directory
+  ```
+  *Example:* Recursively change permissions for all files and directories within `/path/to/directory`.
+
+- **Using `chown` recursively**:
+  ```bash
+  sudo chown -R newowner:newgroup /path/to/directory
+  ```
+  *Example:* Recursively change ownership for all files and directories within `/path/to/directory`.
+
+## Shell Redirections Cheatsheet
+
+## Basic Concepts
+
+- **Standard Input (stdin)**: File descriptor 0, usually refers to input from the keyboard.
+- **Standard Output (stdout)**: File descriptor 1, usually refers to the output on the terminal.
+- **Standard Error (stderr)**: File descriptor 2, used for error messages.
+
+
+## Redirection Operators
+
+### Redirecting Output
+
+- **Redirect stdout to a file**:
+  ```bash
+    command > file.txt
+  ```
+  Example: Writes the output of command to file.txt, overwriting the file.
+
+- **Append stdout to a file**:
+
+  ```bash
+  command >> file.txt
+  ```
+    Example: Appends the output of command to file.txt, preserving the existing content.
+
+### Redirecting Input
+
+- **Redirect stdin from a file**:
+
+  ```bash
+    command < file.txt
+  ```
+    Example: Takes input for command from file.txt.
+
+### Redirecting stderr
+
+- **Redirect stderr to a file**:
+
+  ```bash
+    command 2> error.log
+  ```
+  Example: Writes the error messages of command to error.log.
+
+- **Append stderr to a file**:
+
+  ```bash
+  command 2>> error.log
+  ```
+  
+  Example: Appends the error messages of command to error.log.
+
+### Redirecting stdout and stderr
+
+- **Redirect stdout and stderr to the same file**:
+
+  ```bash
+  command > file.txt 2>&1
+  ```
+
+  Example: Writes both output and error messages of command to file.txt.
+
+- **Redirect stdout and stderr to separate files**:
+
+  ```bash
+  command > output.log 2> error.log
+  ```
+
+  Example: Writes output to output.log and errors to error.log.
+
+- **Redirect both stdout and stderr to the same file (shorthand)**:
+
+  ```bash
+  command &> file.txt
+  ```
+
+  Example: In bash, redirects both stdout and stderr to file.txt.
+
+### Combining Commands with Redirections
+
+- **Pipe (|)**:
+
+  ```bash
+  command1 | command2
+  ```
+
+  Example: Takes the output of command1 and uses it as the input for command2.
+
+- **Tee Command**:
+
+  ```bash
+  command | tee file.txt
+  ```
+
+  Example: Writes the output of command to both file.txt and the terminal.
+
+### Advanced Redirections
+
+- **Redirect stdout to /dev/null**:
+
+  ```bash
+  command > /dev/null
+  ```
+
+  Example: Discards the output of command.
+
+- **Redirect stderr to /dev/null**:
+
+  ```bash
+  command 2> /dev/null
+  ```
+
+  Example: Discards the error messages of command.
+
+- **Suppress both stdout and stderr**:
+
+  ```bash
+  command &> /dev/null
+  ```
+
+  Example: Discards both output and error messages of command.
+
+### Heredoc and Here Strings
+
+- **Heredoc (<<)**:
+
+  ```bash
+  command << EOF
+  This is a multiline string.
+  It is used as input for the command.
+  EOF
+  ```
+
+  Example: Sends the multiline string as input to command.
+
+- **Here String (<<<)**:
+
+  ```bash
+  command <<< "This is a string."
+  ```
+
+  Example: Sends a single string as input to command.
