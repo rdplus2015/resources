@@ -622,3 +622,180 @@ machines can only speak in binary
   ```
 
   Example: Sends a single string as input to command.
+
+
+# Linux User and Group Management Cheatsheet
+
+## User Management
+
+### Creating a User
+- **Create a new user**:
+  ```bash
+  sudo useradd username
+  ```
+  Example: Creates a user with the name `username`.
+
+- **Create a user with a home directory**:
+  ```bash
+  sudo useradd -m username
+  ```
+  Example: Creates a user and generates a home directory (`/home/username`).
+
+- **Assign a password to a user**:
+  ```bash
+  sudo passwd username
+  ```
+  Example: Sets a password for the user `username`.
+
+### Modifying a User
+- **Modify an existing user**:
+  ```bash
+  sudo usermod -l new_name old_name
+  ```
+  Example: Changes the username from `old_name` to `new_name`.
+
+- **Add a user to a group**:
+  ```bash
+  sudo usermod -aG group_name username
+  ```
+  Example: Adds `username` to the group `group_name`.
+
+### Deleting a User
+- **Delete a user**:
+  ```bash
+  sudo userdel username
+  ```
+  Example: Deletes the user `username`.
+
+- **Delete a user and their home directory**:
+  ```bash
+  sudo userdel -r username
+  ```
+  Example: Deletes the user and their home directory (`/home/username`).
+
+## Group Management
+
+### Creating and Managing Groups
+- **Create a group**:
+  ```bash
+  sudo groupadd group_name
+  ```
+  Example: Creates a group named `group_name`.
+
+- **Add a user to a group**:
+  ```bash
+  sudo usermod -aG group_name username
+  ```
+  Example: Adds `username` to the group `group_name`.
+
+- **Change a user's primary group**:
+  ```bash
+  sudo usermod -g group_name username
+  ```
+  Example: Sets `group_name` as the primary group for `username`.
+
+### Deleting a Group
+- **Delete a group**:
+  ```bash
+  sudo groupdel group_name
+  ```
+  Example: Deletes the group `group_name`.
+
+## Permissions and Ownership Management
+
+### Change Ownership of a File or Directory
+- **Change the owner of a file or directory**:
+  ```bash
+  sudo chown username file_or_directory
+  ```
+  Example: Changes the owner of `file_or_directory` to `username`.
+
+- **Change the owner and group**:
+  ```bash
+  sudo chown username:group_name file_or_directory
+  ```
+  Example: Changes the owner to `username` and the group to `group_name`.
+
+### Change Permissions
+- **Change the permissions of a file or directory**:
+  ```bash
+  sudo chmod 755 file_or_directory
+  ```
+  Example: Sets specific permissions (`rwxr-xr-x`) on `file_or_directory`.
+
+- **Recursively change permissions on a directory**:
+  ```bash
+  sudo chmod -R 755 directory
+  ```
+  Example: Applies `755` permissions to all files and subdirectories within `directory`.
+
+## User and Group Information
+
+### View User Information
+- **Display information about a user**:
+  ```bash
+  id username
+  ```
+  Example: Shows the user ID and group details for `username`.
+
+- **See currently logged-in users**:
+  ```bash
+  who
+  ```
+  Example: Displays users currently logged into the system.
+
+- **Display the last logged-in users**:
+  ```bash
+  last
+  ```
+  Example: Lists the last users who logged in.
+
+### View Available Groups
+- **List all groups**:
+  ```bash
+  getent group
+  ```
+  Example: Displays all groups available on the system.
+
+### Modify User and Group Configuration Files
+- **User file (/etc/passwd)**:
+  ```bash
+  sudo nano /etc/passwd
+  ```
+  Example: Contains user information.
+
+- **Group file (/etc/group)**:
+  ```bash
+  sudo nano /etc/group
+  ```
+  Example: Contains group information.
+
+## Security and Advanced Management
+
+### Lock and Unlock a User Account
+- **Lock a user account**:
+  ```bash
+  sudo usermod -L username
+  ```
+  Example: Locks the account `username`.
+
+- **Unlock a user account**:
+  ```bash
+  sudo usermod -U username
+  ```
+  Example: Unlocks the account `username`.
+
+### Password Expiration
+- **Set password expiration**:
+  ```bash
+  sudo chage -E YYYY-MM-DD username
+  ```
+  Example: Sets the password expiration date for `username`.
+
+- **Check password expiration settings**:
+  ```bash
+  sudo chage -l username
+  ```
+  Example: Displays expiration settings for `username`.
+
+  
