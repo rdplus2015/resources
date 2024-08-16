@@ -798,4 +798,68 @@ machines can only speak in binary
   ```
   Example: Displays expiration settings for `username`.
 
-  
+  ## 1. Package Management System: APT
+
+- `apt-get update`: Updates the list of available packages.
+- `apt-get upgrade`: Installs the latest versions of installed packages.
+- `apt-get install <package>`: Installs a specific package.
+- `apt-get remove <package>`: Removes a package without deleting its configuration files.
+- `apt-get purge <package>`: Removes a package along with its configuration files.
+- `apt-get autoremove`: Removes unused dependencies.
+- `apt-get clean`: Deletes downloaded package archive files.
+
+## 2. Dependency Management
+
+- `apt-cache depends <package>`: Lists dependencies of a package.
+- `apt-mark hold <package>`: Prevents a package from being upgraded.
+- `apt-mark unhold <package>`: Allows a package to be upgraded again.
+
+## 3. Package Search
+
+- `apt-cache search <keyword>`: Searches for packages by keyword.
+- `apt-cache show <package>`: Displays detailed information about a package.
+
+## 4. Package Source Management
+
+- `/etc/apt/sources.list`: Main file where package repositories are defined.
+- `add-apt-repository <repository>`: Adds a new package repository.
+
+## 5. Local Package Management
+
+- `dpkg -i <package>.deb`: Installs a local .deb package.
+- `dpkg -r <package>`: Removes a locally installed package.
+- `dpkg -P <package>`: Purges a locally installed package, including configuration files.
+
+## 6. Diagnostics and Repair
+
+- `apt-get -f install`: Fixes missing or broken dependencies.
+- `dpkg --configure -a`: Configures unconfigured packages.
+- `dpkg --audit`: Checks for packages that are not completely installed.
+
+## 7. Pinning (Package Prioritization)
+
+- `/etc/apt/preferences`: Configuration file for pinning, allowing specification of preferred package versions.
+  - Example:
+    ```yaml
+    Package: *
+    Pin: release a=stable
+    Pin-Priority: 1001
+    ```
+
+## 8. Using Aptitude
+
+- `aptitude update`: Updates the list of available packages.
+- `aptitude upgrade`: Upgrades installed packages.
+- `aptitude install <package>`: Installs a package.
+- `aptitude remove <package>`: Removes a package.
+
+## 9. Managing GPG Keys
+
+- `apt-key list`: Lists GPG keys.
+- `apt-key add <keyfile>`: Adds a new GPG key.
+- `apt-key del <key>`: Removes a GPG key.
+
+## 10. Broken Packages and Rollbacks
+
+- `apt-get install <package>=<version>`: Installs a specific version of a package.
+- `apt-cache policy <package>`: Displays available versions of a package.
