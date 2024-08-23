@@ -514,7 +514,96 @@ The `@font-face` rule allows you to load custom fonts on your website. You can s
 - **Often replaced by Flexbox and Grid in modern layouts.*** 
 
 ## Flexbox 
-       - content here
+## **Basic Concepts**
+
+- **Flex Container:** The parent element with `display: flex;`. It enables flex context for all direct children (flex items).
+- **Flex Item:** The direct children of a flex container.
+
+## **Flex Container Properties**
+- **`display`**
+  - `flex`: Defines a flex container.
+  - `inline-flex`: Defines an inline flex container.
+
+- **`flex-direction`**
+  - `row`: Default. Items are placed in a row (left to right).
+  - `row-reverse`: Items are placed in a row (right to left).
+  - `column`: Items are placed in a column (top to bottom).
+  - `column-reverse`: Items are placed in a column (bottom to top).
+
+- **`flex-wrap`**
+  - `nowrap`: Default. All items will be on one line.
+  - `wrap`: Items will wrap onto multiple lines.
+  - `wrap-reverse`: Items will wrap onto multiple lines in reverse order.
+
+- **`justify-content`**
+  - `flex-start`: Default. Items are aligned to the start of the container.
+  - `flex-end`: Items are aligned to the end of the container.
+  - `center`: Items are centered in the container.
+  - `space-between`: Items are evenly distributed; the first item is at the start, and the last item is at the end.
+  - `space-around`: Items are evenly distributed with equal space around them.
+  - `space-evenly`: Items are distributed with equal space between them.
+
+- **`align-items`**
+  - `stretch`: Default. Items stretch to fill the container.
+  - `flex-start`: Items are aligned to the start of the container.
+  - `flex-end`: Items are aligned to the end of the container.
+  - `center`: Items are centered along the cross-axis.
+  - `baseline`: Items are aligned based on their text baseline.
+
+- **`align-content`**
+  - `stretch`: Default. Lines stretch to take up remaining space.
+  - `flex-start`: Lines are packed to the start of the container.
+  - `flex-end`: Lines are packed to the end of the container.
+  - `center`: Lines are centered in the container.
+  - `space-between`: Lines are evenly distributed; the first line is at the start, and the last line is at the end.
+  - `space-around`: Lines are evenly distributed with equal space around them.
+  - `space-evenly`: Lines are distributed with equal space between them.
+
+## **Flex Item Properties**
+- **`order`**
+  - Defines the order of the items. Lower values are displayed first.
+  - Default: `0`
+
+- **`flex-grow`**
+  - Defines how much a flex item should grow relative to the rest.
+  - Default: `0` (item does not grow)
+
+- **`flex-shrink`**
+  - Defines how much a flex item should shrink relative to the rest.
+  - Default: `1` (item can shrink)
+
+- **`flex-basis`**
+  - Defines the initial size of a flex item before space is distributed.
+  - Can be a length (e.g., `20%`, `100px`) or `auto`.
+  - Default: `auto`
+
+- **`align-self`**
+  - Allows the default alignment (or the one specified by `align-items`) to be overridden for individual flex items.
+  - Default: `auto` (inherits from `align-items`)
+  - Options: `auto`, `flex-start`, `flex-end`, `center`, `baseline`, `stretch`.
+
+- **`flex` (Shorthand)**
+  - `flex-grow flex-shrink flex-basis`
+  - Example: `flex: 1 0 auto;`
+
+## **Example Layout**
+
+```css
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: flex-start;
+}
+
+.item {
+  flex: 1 1 200px; /* Grow, shrink, basis */
+  order: 1;
+  align-self: flex-end;
+}
+```
 ## Css grid 
        - content here 
 
@@ -540,5 +629,6 @@ The `@font-face` rule allows you to load custom fonts on your website. You can s
    - [Autoprefixer](https://autoprefixer.github.io/)
    
    - [Fontsquirrel](https://www.fontsquirrel.com/)
+
 
    
