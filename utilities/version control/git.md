@@ -1,7 +1,7 @@
 
 # Git Cheat 
 
-## Configuration and Initialization
+## Installation
 ```bash
 sudo apt update
 ```
