@@ -1,5 +1,16 @@
 
-# Git Cheat Sheet
+# Git Cheat 
+
+## Configuration and Initialization
+```bash
+sudo apt update
+```
+```bash
+sudo apt install git
+```
+```bash
+git --version
+```
 
 ## Configuration and Initialization
 
