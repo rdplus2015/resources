@@ -1,5 +1,5 @@
 
-# **Django Class-Based Views (CBVs) Cheatsheet**
+# **Django Class-Based Views (CBVs)**
 
 ## **Overview**
 

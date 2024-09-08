@@ -1,5 +1,5 @@
 
-# Java Mathematical Operations Cheatsheet
+# Java Mathematical Operations 
 
 ## 1. Basic Arithmetic Operators
 
@@ -39,7 +39,7 @@ System.out.println(++x); // Increments first, then prints 7
 | Division Assignment | `/=` | Divides and assigns | `int a = 6; a /= 2; // a = 3` |
 | Modulus Assignment | `%=` | Applies modulus and assigns | `int a = 5; a %= 3; // a = 2` |
 
-## 4. Integer Division (`//` in some languages)
+## 4. Integer Division
 
 In Java, integer division truncates the result. There is no specific `//` operator for floor division in Java, but you can use integer division directly:
 ```java
@@ -150,6 +150,8 @@ double result2 = (double) a / b; // Output: 2.5
 ```
 
 In this example, casting one of the operands (`a`) to `double` ensures that the division produces a floating-point result rather than an integer result.
+
+- **Note**: **In Java, during an arithmetic operation between primitive types like byte, the values ​​are automatically promoted to int for calculation.**
 
 ### Casting with Strings
 

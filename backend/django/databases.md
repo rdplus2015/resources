@@ -1,5 +1,5 @@
 
-# PostgreSQL Setup and Commands Cheat Sheet
+# PostgreSQL Setup and Commands
 
 ## Installation
 

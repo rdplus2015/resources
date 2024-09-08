@@ -1,4 +1,4 @@
-# Django Admin Configuration for BlogPost Model
+# Django Admin Configuration
 
 ## Simple Registration in `admin.py`
 
