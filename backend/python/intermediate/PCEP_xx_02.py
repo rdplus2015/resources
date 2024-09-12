@@ -1,4 +1,4 @@
-# ======== PCEP-30-XX ========= < > #
+# PCEP-30-XX
 """
 PCEP : Certified Entry-Level Python Programmer certification shows that you are familiar with universal computer
 Programming concepts like data types, containers, functions, conditions, and loops, as well as the most important
