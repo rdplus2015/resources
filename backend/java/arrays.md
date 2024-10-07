@@ -82,11 +82,6 @@ int[][] matrix = {
 int element = matrix[1][2]; // Accessing element in the second row, third column
 ```
 
-## Arrays vs. ArrayLists
-
-- `Arrays` are fixed-size and can hold primitive types and objects.
-- `ArrayLists` are resizable and provide more built-in methods for manipulation.
-
 ## Copying Arrays
 
 - **Apart from `Arrays.copyOf()`, you can also use:**
@@ -176,3 +171,130 @@ public class ArrayExample {
   - **`Searching`: Arrays.binarySearch(array, key);**
   - **`Copying`: Arrays.copyOf(original, newLength);**
   - **`Equality`: Arrays.equals(array1, array2);**
+
+
+
+## ArrayList in Java
+
+In Java, an **ArrayList** is a dynamic data structure that is part of the `java.util` package. Unlike regular arrays, an `ArrayList` can change its size dynamically, meaning it can grow or shrink automatically based on additions and deletions of elements. It's very useful when you want to store a list of items and don't know the size in advance.
+
+## Key Features of an `ArrayList`:
+- It is **resizable**.
+- Elements can be **accessed by their index**, similar to arrays.
+- It can only contain objects (primitive types like `int`, `char`, etc., must be wrapped in their object versions, such as `Integer` for `int`).
+- It **maintains insertion order**.
+
+## Basic Usage Example:
+
+```java
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        // Create an ArrayList that stores strings
+        ArrayList<String> fruits = new ArrayList<>();
+
+        // Add elements
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Orange");
+
+        // Access an element by index
+        System.out.println("First fruit: " + fruits.get(0)); // Apple
+
+        // Size of the ArrayList
+        System.out.println("Size of the list: " + fruits.size()); // 3
+
+        // Remove an element
+        fruits.remove("Banana");
+
+        // Display all elements
+        for (String fruit : fruits) {
+            System.out.println(fruit);
+        }
+    }
+}
+```
+
+## Main Methods of an `ArrayList`:
+1. **`add(E e)`**: Adds an element to the list.
+   - Example: `fruits.add("Mango");`
+   
+2. **`get(int index)`**: Returns the element at the specified position.
+   - Example: `fruits.get(1);`
+   
+3. **`size()`**: Returns the size of the list (the number of elements).
+   - Example: `fruits.size();`
+   
+4. **`remove(Object o)`** or **`remove(int index)`**: Removes the specified element or the element at the given index.
+   - Example: `fruits.remove("Orange");` or `fruits.remove(0);`
+   
+5. **`clear()`**: Clears the list, removing all elements.
+   - Example: `fruits.clear();`
+   
+6. **`contains(Object o)`**: Checks if an element is in the list.
+   - Example: `fruits.contains("Apple");` // Returns `true` if "Apple" is in the list.
+   
+7. **`isEmpty()`**: Checks if the list is empty.
+   - Example: `fruits.isEmpty();`
+
+## Special Case: Arrays of Different Lengths
+If a string is a **prefix** of another (for example, `"app"` and `"apple"`), the shorter string is considered "smaller" according to lexicographical order.
+
+Example:
+
+```java
+String s1 = "app";
+String s2 = "apple";
+
+int result = s1.compareTo(s2); // result will be negative because "app" is shorter than "apple"
+```
+
+The lexicographical order in Java follows dictionary-like rules, with additional considerations for string length and the numeric codes of characters.
+
+## Full Example
+
+```java
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        // Create an ArrayList that stores strings
+        ArrayList<String> fruits = new ArrayList<>();
+        
+        // Add elements
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Orange");
+        
+        // Print the first element
+        System.out.println("First fruit: " + fruits.get(0)); // Apple
+        
+        // Remove an element
+        fruits.remove("Banana");
+        
+        // Print all elements
+        for (String fruit : fruits) {
+            System.out.println(fruit);
+        }
+        
+        // Size of the ArrayList
+        System.out.println("Size of the list: " + fruits.size()); // 2
+    }
+}
+```
+
+## Summary of Key Methods
+
+| Method               | Description                                                                 |
+|----------------------|-----------------------------------------------------------------------------|
+| `add(E e)`           | Adds an element to the end of the `ArrayList`.                               |
+| `get(int index)`      | Returns the element at the specified index.                                 |
+| `remove(int index)`   | Removes the element at the specified index.                                 |
+| `remove(Object o)`    | Removes the first occurrence of the specified object from the list.         |
+| `size()`              | Returns the number of elements in the `ArrayList`.                          |
+| `clear()`             | Removes all elements from the `ArrayList`.                                  |
+| `contains(Object o)`  | Checks if the `ArrayList` contains a specific object.                       |
+| `isEmpty()`           | Checks if the `ArrayList` is empty (returns `true` or `false`).             |
+
+The **ArrayList** is a very flexible and simple-to-use structure for storing and manipulating dynamic collections of objects in Java.
