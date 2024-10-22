@@ -172,9 +172,9 @@ public class ArrayExample {
   - **`Copying`: Arrays.copyOf(original, newLength);**
   - **`Equality`: Arrays.equals(array1, array2);**
 
+--- 
 
-
-## ArrayList in Java
+# ArrayList in Java
 
 In Java, an **ArrayList** is a dynamic data structure that is part of the `java.util` package. Unlike regular arrays, an `ArrayList` can change its size dynamically, meaning it can grow or shrink automatically based on additions and deletions of elements. It's very useful when you want to store a list of items and don't know the size in advance.
 

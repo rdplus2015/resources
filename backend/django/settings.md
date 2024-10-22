@@ -129,7 +129,11 @@ SECURE_BROWSER_XSS_FILTER=True
 SECURE_CONTENT_TYPE_NOSNIFF=True
     
 # Database Configuration
-DATABASE_URL=postgres://username:password@localhost/db_name
+# For SQLite
+DATABASE_URL=sqlite:///path/to/your/db.sqlite3
+
+# For PostgreSQL
+DATABASE_URL=postgres://your_database_user:your_password@localhost:5432/your_database_name
 ```
 
 ```python
@@ -203,9 +207,10 @@ htmlcov/
 .coverage
 
 # Ignore compiled static files directory
-/static/
+static/
 
-# Ignore environment configuration files
-/.env/ # example 
-.config_env # example
+# Ignore environment configuration files or folder
+.env/
+.env 
+
 ```

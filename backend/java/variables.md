@@ -163,9 +163,6 @@ public class WrapperExample {
 }
 ```
 
-## Summary
-Wrapper classes allow primitive types to be "wrapped" in objects, which is useful for collections and taking advantage of the utility methods provided by wrapper classes.
-
 ## 6. Getting User Input (Using Scanner Class)
 
 - To retrieve input from the user, use the `Scanner` class.
@@ -230,7 +227,7 @@ public class Main {
 
 -   **`scanner`** is the name of the variable (the instance of the `Scanner` class).
 
--   **`new Scanner(System.in)`** creates a new object of the `Scanner` class that takes user input from the console (using `System.in`).
+-   **`new Scanner(System.in)`** creates a new object of the `Scanner` class that takes user input from the console (using `System.in`) and others types of data like files, etc ... 
 ## NextLine Trap 
 
 To avoid the `nextLine` trap, always consume the newline character left by previous Scanner methods before calling `nextLine()`.
