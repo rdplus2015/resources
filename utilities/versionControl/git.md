@@ -1,32 +1,33 @@
 
-# Git Cheat 
+# Git Commands
 
 ## Installation
 ```bash
 sudo apt update
 ```
 ```bash
-sudo apt install git
+  sudo apt install git
 ```
 ```bash
-git --version
+  git --version
 ```
+--- 
 
 ## Configuration and Initialization
 
 - Set username:
   ```bash
-  git config --global user.name "user_name"
+  git config --global user.name "user_name" # use --local for specific to a repository
   ```
 
 - Set email:
   ```bash
-  git config --global user.email "my@email.com"
+  git config --global user.email "my@email.com" # use --local for specific to a repository
   ```
 
 - Show all configurations:
   ```bash
-  git config --global --list
+  git config --global --list # use --local for specific to a repository
   ```
 
 - Get help:
@@ -44,7 +45,7 @@ git --version
   git branch -m main
   ```
 
-## SSH Key Configuration
+## SSH Key Configuration for GitHub
 
 - Generate an SSH key:
   ```bash
@@ -55,9 +56,10 @@ git --version
   ```bash
   cat ~/.ssh/id_rsa.pub
   ```
-
+---
 ## Basic Commands
 
+### Repository Initialization 
 - Initialize a Git repository:
   ```bash
   git init
@@ -68,7 +70,7 @@ git --version
   git status
   ```
 
-- ### Staging Area
+### Staging Area
 
 - Add a file to the staging area:
   ```bash
@@ -81,10 +83,15 @@ git --version
   ```
 
 - Remove files from the staging area:
-  ```bash
-  git reset
-  ```
 
+  ```bash
+  git restore --staged <files>  # or git reset (The file is still tracked by Git.)
+  ```
+- removes files from the staging area
+  ```bash
+  git rm -r --cached <files> # Git stops tracking the file altogether.
+  # Use this command when you want Git to stop tracking a file that is already versioned.
+  ```
 - Create a commit with a message:
   ```bash
   git commit -m "enter your message here"
@@ -92,13 +99,15 @@ git --version
 
 - See differences between the working directory and the index:
   ```bash
-  git diff <file_name>
+  git diff <file_name> # Shows you what you modified in your file before doing git add.
   ```
 
 - See differences after staging:
   ```bash
-  git diff --cached
+  git diff --cached # Shows you what is already in the staging area and ready to be committed in the next commit.m  
   ```
+
+---
 
 ## History and Inspection
 
@@ -141,6 +150,7 @@ git --version
   ```bash
   git tag
   ```
+---
 
 ## Working with Remote Repositories
 
@@ -188,6 +198,7 @@ git --version
   ```bash
   git blame <file.extension>
   ```
+---
 
 ## Branching
 
@@ -229,8 +240,11 @@ git --version
 - Cherry-pick a commit:
   ```bash
   git cherry-pick <commit_SHA>
+  # If someone made an important commit in another branch 
+  # and you need it on your branch without wanting to merge all the other changes from that branch.
   ```
   
+---
 
 ## Stashing
 
