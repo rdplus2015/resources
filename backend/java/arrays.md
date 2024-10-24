@@ -22,6 +22,7 @@ int numbers[]; // Valid
 ```java
 // Static initialization
 int[] numbers = {1, 2, 3, 4, 5};
+String[] infos = new String[] {"Tires", "Keys"}; // new String[] {"tires", "keys"} if you want to pass it like an arg.
 
 // Dynamic initialization
 int[] numbers = new int[5]; // Creates an array of size 5
@@ -286,15 +287,17 @@ public class Main {
 
 ## Summary of Key Methods
 
-| Method               | Description                                                                 |
-|----------------------|-----------------------------------------------------------------------------|
-| `add(E e)`           | Adds an element to the end of the `ArrayList`.                               |
-| `get(int index)`      | Returns the element at the specified index.                                 |
-| `remove(int index)`   | Removes the element at the specified index.                                 |
-| `remove(Object o)`    | Removes the first occurrence of the specified object from the list.         |
-| `size()`              | Returns the number of elements in the `ArrayList`.                          |
-| `clear()`             | Removes all elements from the `ArrayList`.                                  |
-| `contains(Object o)`  | Checks if the `ArrayList` contains a specific object.                       |
-| `isEmpty()`           | Checks if the `ArrayList` is empty (returns `true` or `false`).             |
+| Method          | Description                                                                |
+|-----------------|----------------------------------------------------------------------------|
+| `add(E e)`      | Adds an element to the end of the `ArrayList`.                             |
+| `get(int index)` | Returns the element at the specified index.                                |
+| `set(int index, E element)` |Replaces the element at the specified position with the specified element.  |
+| `remove(int index)` | Removes the element at the specified index.                                |
+| `remove(Object o)` | Removes the first occurrence of the specified object from the list.        |
+| `size()`        | Returns the number of elements in the `ArrayList`.                         |
+| `clear()`       | Removes all elements from the `ArrayList`.                                 |
+| `contains(Object o)` | Checks if the `ArrayList` contains a specific object.                      |
+| `isEmpty()`     | Checks if the `ArrayList` is empty (returns `true` or `false`).            |
+
 
 The **ArrayList** is a very flexible and simple-to-use structure for storing and manipulating dynamic collections of objects in Java.

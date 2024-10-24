@@ -35,6 +35,13 @@ public class Main {
     }
 }
 ```
+```java
+    /* new Car("Dodge", 8500, 2019, "blue", new String[] {"tires", "keys"})); In java you can create an object without store it in a variable */
+Car[] cars = new Car[] {
+        new Car("Nissan", 5000, 2020, "red", new String[] {"tires", "keys"}),
+        new Car("Dodge", 8500, 2019, "blue", new String[] {"tires", "keys"})
+};
+```
 
 ###  Classes and Objects with a constructor 
 A **constructor** in Java is a special method used to initialize objects when they are created. It is called automatically when you create a new instance of a class using the `new` keyword. The constructor sets up the initial state of the object by assigning values to its fields.
@@ -77,7 +84,12 @@ public class Main {
         // Create a new Car object with the first 
         Car carOne = new Car("Toyota", 2015, 100.000F);
         System.out.println("Name: " + carOne.name + ".\n" + "Price: " + carOne.year); // Will print nothing
-
+      
+        // Update (Without Encapsulation)
+        carOne.name = "Honda";
+        carOne.price = 5000.00F;
+        System.out.println("Name: " + carOne.name + ".\n" + "Price: " + carOne.year); // Will print all values
+      
         // Create a new Car object with the second 
         Car carTwo = new Car("Nissan");
         System.out.println("Name: " + carTwo.name + ".\n" + "Price: " + carTwo.year); // Will print nothing
@@ -85,3 +97,8 @@ public class Main {
     }
 }
 ```
+
+### Note: Not Using Encapsulation May Be Acceptable:
+
+In some very simple programs or small projects where you're confident that data doesn't need to be protected or modified in controlled ways, encapsulation might seem unnecessary. For example, in **POJOs (Plain Old Java Objects)** or **data transfer objects**, you might not care about the encapsulation.
+However, in most professional codebases and larger projects, encapsulation is essential for maintainability, flexibility, and robustness.
