@@ -90,6 +90,7 @@ public class Main {
         carOne.price = 5000.00F;
         System.out.println("Name: " + carOne.name + ".\n" + "Price: " + carOne.year); // Will print all values
       
+
         // Create a new Car object with the second 
         Car carTwo = new Car("Nissan");
         System.out.println("Name: " + carTwo.name + ".\n" + "Price: " + carTwo.year); // Will print nothing
