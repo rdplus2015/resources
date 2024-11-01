@@ -1,0 +1,172 @@
+
+/* 
+    === Reset and Base Normalization ===
+    This CSS file provides a standardized style across all browsers.
+    It resets the default margins and paddings and sets key values
+    for consistent web development.
+*/
+
+/* === CSS Variables === */
+
+:root {
+        --color-link: #007bff; /* Color for links */
+        --color-link-hover: #0056b3; /* Clor on hover for links */
+
+        --color-input-border: #ccc; /* Color for input field borders */
+        --color-btn-bg: #007bff; /* Background color for buttons */
+        --color-btn: #fff; /* Text color for buttons */ 
+        --color-btn-hover: #0056b3; /* Background color for buttons on hover */
+
+        --color-main: #333333; /* Color for main text */
+        --color-main-bg: #ffffff; /* Color for the main background of the page */
+        --color-main-bg-sec: #ccc9c9; /* Color for the secondary background of the page */
+        
+        --size-main: 16px; /* Base font size */
+        --font-main: sans-serif; /* Sans-serif font for the text */
+        --mxw-container: 1075px; /* Maximum width for the container */
+    }
+    
+/* === Box Sizing === */
+*,
+*::before,
+*::after {
+        box-sizing: border-box; /* Ensures padding and border are included in total width and height */
+        padding: 0; /* Resets padding for all elements */
+        margin: 0; /* Resets margin for all elements */
+    }
+    
+/* === Base Style for Body === */
+body {
+        background-color: var(--color-main-bg); /* Sets background color for the body */
+        color: var(--color-main); /* Sets text color for the body */
+        font-size: var(--size-main); /* Sets base font size */
+        font-family: var(--font-main), serif; /* Sets font family for body text */
+        line-height: 1.6; /* Sets line height for readability */
+    }
+    
+/* === Block Element Behavior === */
+nav, article, aside, div, header, footer, section {
+        display: block; /* Ensures these elements are displayed as block-level elements */
+        width: 100%; /* Sets width to 100% for full responsiveness */
+        padding: 10px; /* Adds default padding to all block elements */
+    }
+    
+/* Container for the main section */
+.container-col {
+        display: block; /* Ensures the container is displayed as a block */
+        max-width: var(--mxw-container); /* Sets maximum width from variables */
+        margin: 0 auto; /* Centers the container horizontally */
+    }
+    
+main section {
+        padding: 75px 0; /* Adds vertical padding to sections within main */
+    }
+    
+/* Remove padding for nested elements to avoid duplicate spacing */
+nav nav, nav article, nav aside, nav div, nav header, nav footer, nav section,
+article nav, article article, article aside, article div, article header, article footer, article section,
+aside nav, aside article, aside aside, aside div, aside header, aside footer, aside section,
+div nav, div article, div aside, div div, div header, div footer, div section,
+header nav, header article, header aside, header div, header header, header footer, header section,
+footer nav, footer article, footer aside, footer div, footer header, footer footer, footer section,
+section nav, section article, section aside, section div, section header, section footer, section section {
+        padding: 0; /* Resets padding for nested elements */
+    }
+    
+/* === Default Size for All Images === */
+img, video {
+        max-width: 100%; /* Ensures images and videos are responsive and fit within their containers */
+        height: auto; /* Maintains aspect ratio of images and videos */
+    }
+    
+picture img {
+        width: 100%; /* Makes images within a <picture> element responsive */
+        height: auto; /* Maintains aspect ratio for pictures */
+    }
+    
+/* === Title Styles === */
+h1, h2, h3, h4, h5, h6 {
+        margin: 0.5rem 0; /* Adds vertical margin to headings */
+    }
+    
+h1 { font-size: 2.5rem; font-weight: 700; } /* Style for H1: large font size and bold weight */
+h2 { font-size: 2rem; font-weight: 600; } /* Style for H2: slightly smaller and bold weight */
+h3 { font-size: 1.75rem; font-weight: 500; } /* Style for H3: medium font size and medium weight */
+h4 { font-size: 1.5rem; font-weight: 500; } /* Style for H4: medium font size and medium weight */
+h5 { font-size: 1.25rem; font-weight: 400; } /* Style for H5: smaller font size and regular weight */
+h6 { font-size: 1rem; font-weight: 400; } /* Style for H6: smallest font size and regular weight */
+    
+/* === Paragraph Styles === */
+p {
+        margin: 0.5rem 0; /* Adds vertical margin to paragraphs for spacing */
+    }
+    
+/* === Link Styles === */
+a {
+        text-decoration: none; /* Removes underline from links */
+        color: var(--color-link); /* Sets link color from variable */
+        margin: 0.5rem 0; /* Adds vertical margin to links */
+        transition: color 0.3s ease; /* Smooth transition for color change on hover */
+    }
+    
+a:hover {
+        color: var(--color-link-hover); /* Changes color on hover */
+    }
+    
+/* === List Styles === */
+ul, ol {
+        padding-left: 20px; /* Adds left padding to lists for indentation */
+        margin: 0.5rem 0; /* Adds vertical margin to lists */
+    }
+    
+li {
+        margin: 0; /* Resets margin for list items */
+    }
+    
+/* === Button and Form Element Styles === */
+button, input, select, textarea {
+        padding: 0.5em; /* Adds padding to buttons and form elements */
+        font-family: inherit; /* Inherits font family from parent elements */
+    }
+    
+/* Form field styles */
+input[type="text"], input[type="email"], input[type="password"], textarea {
+        width: 100%; /* Sets width to 100% for responsiveness */
+        border: 1px solid var(--color-input-border); /* Sets border color from variable */
+        border-radius: 4px; /* Rounds the corners of input fields */
+        margin-bottom: 1em; /* Adds bottom margin for spacing */
+    }
+    
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus {
+        border-color: var(--color-link); /* Changes border color on focus */
+        outline: none; /* Removes outline on focus */
+        box-shadow: 0 0 3px var(--color-link); /* Adds shadow for focus indication */
+    }
+    
+/* Basic button style */
+button {
+        background-color: var(--color-btn-bg); /* Sets background color for buttons */
+        color: var(--color-btn); /* Sets text color for buttons */
+        border: none; /* Removes border for a cleaner look */
+        border-radius: 4px; /* Rounds corners of buttons */
+        padding: 0.5em 1em; /* Adds padding for buttons */
+        cursor: pointer; /* Changes cursor to pointer on hover */
+        transition: background-color 0.3s ease; /* Smooth transition for background color change on hover */
+    }
+    
+button:hover {
+        background-color: var(--color-btn-hover); /* Changes background color on hover */
+    }
+    
+/* === Table Styles === */
+table {
+        padding: 10px; /* Adds padding inside tables */
+        border-collapse: collapse; /* Merges table borders */
+        width: 100%; /* Sets width to 100% for full responsiveness */
+    }
+    
+th, td {
+        padding: 8px; /* Adds padding inside table headers and cells */
+        text-align: left; /* Aligns text to the left */
+        border: 1px solid var(--color-input-border); /* Sets border color from variable */
+    }
