@@ -27,7 +27,7 @@
 
 --- 
 
-### Units of Measurement
+## Units of Measurement
 
 - **Media** : media: screen, print, etc.
 
@@ -51,9 +51,19 @@
     
     - *It’s great for making layouts responsive, as it adapts to the size of the parent container.*
 
-    - **Recommending Usage**: *% is ideal for responsive designs, particularly for widths and heights that need to adapt to the container rather than the viewport.*
+    - **Recommending Usage**: *% is ideal for responsive designs, particularly for widths and (heights) that need to adapt to the container rather than the viewport.*
 
 
+- **vh** and **vw** : Relative to the viewport's height and width
+
+  - **When to Use**:
+    - *Use vh and vw for full-screen or viewport-based layouts. For example, a section that always takes up 100% of the viewport height would use height: 100vh;.*
+
+    - *Useful for creating full-page layouts or ensuring elements adjust with the screen size dynamically.*
+
+    - **Recommending Usage**: *vh and vw are ideal for full-page sections, hero banners, or elements that need to scale with the viewport dimensions. Use with caution for smaller components, as it can lead to less control over element proportions.*
+
+  
 - **em**: Relative to the fontsize of the current element or parent.
 
   - **When to Use**:
@@ -72,21 +82,9 @@
 
     - **Recommending Usage**: *em is often recommended for global and consistent scaling across a website. It is particularly effective for responsive typography and layout components.*
 
-
-- **vh** and **vw** : Relative to the viewport's height and width
-
-  - **When to Use**:
-    - *Use vh and vw for full-screen or viewport-based layouts. For example, a section that always takes up 100% of the viewport height would use height: 100vh;.* 
-    
-    - *Useful for creating full-page layouts or ensuring elements adjust with the screen size dynamically.*
-
-    - **Recommending Usage**: *vh and vw are ideal for full-page sections, hero banners, or elements that need to scale with the viewport dimensions. Use with caution for smaller components, as it can lead to less control over element proportions.*
-
-
 ----
 
-
-### Custom Fonts with `@font-face`
+## Custom Fonts with `@font-face`
 
 The `@font-face` rule allows you to load custom fonts on your website. You can specify the font files and define how they should be used in your CSS.
 
@@ -195,6 +193,17 @@ Choosing between a local font and Google Fonts depends on your priorities for pe
 }
 ```
 
+### Shorthand Background Property
+
+- Order:
+  - `background-color` - `background-image` - `background-repeat` - `background-attachment` - `background-position/background-size` - `background-origin` - `background-clip.`
+
+```css
+.background-shorthand-example {
+  background: #f0f0f0 url('image.jpg') no-repeat center/cover;
+}
+```
+
 ### Multiple Backgrounds
 
 ```css
@@ -203,23 +212,6 @@ Choosing between a local font and Google Fonts depends on your priorities for pe
   background-image: url('image1.jpg'), url('image2.png');
   background-position: top left, bottom right;
   background-repeat: no-repeat;
-}
-```
-
-### Shorthand Background Property
-
-- Order: 
-  - `background-color`
-  - `background-image` 
-  - `background-repeat` 
-  - `background-attachment` 
-  - `background-position/background-size` 
-  - `background-origin` 
-  - `background-clip.`
-
-```css
-.background-shorthand-example {
-  background: #f0f0f0 url('image.jpg') no-repeat center/cover;
 }
 ```
 
@@ -241,29 +233,6 @@ Choosing between a local font and Google Fonts depends on your priorities for pe
 ```css
 .radial-gradient-example {
   background: radial-gradient(circle, #ff0000, #00ff00); /* Circular red to green */
-}
-```
-
-### CSS Variables for Backgrounds
-- Define custom properties to reuse color values across backgrounds.
-
-```css
-:root {
-  --primary-color: #3498db;
-}
-
-.background-variables-example {
-  background-color: var(--primary-color);
-}
-
-```
-
-### Responsive background
-```css
-@media (max-width: 600px) {
-  .responsive-background {
-    background-size: contain; /* Adjust for smaller screens */
-  }
 }
 ```
 
