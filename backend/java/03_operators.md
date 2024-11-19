@@ -39,17 +39,7 @@ System.out.println(++x); // Increments first, then prints 7
 | Division Assignment | `/=` | Divides and assigns | `int a = 6; a /= 2; // a = 3` |
 | Modulus Assignment | `%=` | Applies modulus and assigns | `int a = 5; a %= 3; // a = 2` |
 
-## 4. Integer Division
 
-In Java, integer division truncates the result. There is no specific `//` operator for floor division in Java, but you can use integer division directly:
-```java
-int result = 7 / 2; // result is 3 (truncates decimal)
-```
-
-If you need a floating-point result, you can cast one of the numbers to `double`:
-```java
-double result = (double) 7 / 2; // result is 3.5
-```
 
 ## 5. Example Code
 
@@ -92,7 +82,11 @@ public class Main {
 String result = "Sum: " + (a + b); // Output: "Sum: 15" (math is done first)
 ```
 
-**Casting** in Java allows you to convert a variable from one data type to another, either widening or narrowing its type. This is particularly important when dealing with different types in expressions (e.g., converting an `int` to a `double` for precision).
+## Casting 
+**Casting** in Java allows you to convert a variable from one data type to another, either widening or narrowing its type. 
+This is particularly important when dealing with different types in expressions (e.g., converting an `int` to a `double` for precision).
+the **casting** does not magically convert data from one type to another. 
+This simply tells the compiler that you want to interpret or use this data as another type, provided that this conversion is possible.
 
 ### Types of Casting in Java
 
@@ -130,13 +124,6 @@ System.out.println(myInt); // Output: 9
 
 Here, `myDouble` is cast to an `int`, and the fractional part (`.78`) is truncated, resulting in `9`.
 
-### Why Use Casting?
-
-1.  **For Compatibility**: When dealing with mixed data types (e.g., combining integers and floating-point numbers), casting can be necessary to ensure proper calculations or to match method signatures.
-    
-2.  **To Avoid Loss of Precision**: When performing mathematical operations where precision is critical, you might cast integers to floating-point numbers (e.g., `int` to `double`).
-    
-
 ### Example: Casting and Mathematical Operations
 ```java
 int a = 5;
@@ -161,3 +148,32 @@ You can also cast numbers to strings indirectly by using concatenation or method
 int number = 42;
 String str = String.valueOf(number); // Converts int to String
 ```
+## Cast between (referenced) object types
+- here, Java works with inheritance and parent/child classes. The cast does not modify the object itself, it changes only the way we interpret it.
+
+### Upcasting
+- Switch from a child class to a parent class (automatic).
+```java
+Animal animal = new Dog(); // Here, `animal` is seen as an `Animal`, even though it is actually a `Dog`.
+```
+### Downcasting
+- Switch from a parent class to a child class (requires an explicit cast).
+```java
+Animal animal = new Dog();
+Dog dog = (Dog) animal; // Explicit downcasting
+dog.bark(); // Use methods specific to the Dog class
+```
+**Important condition:** The object must actually be of the target type. Otherwise, a `ClassCastException` exception will be thrown.
+
+### Incorrect example:
+```java
+Animal animal = new Animal();
+Dog dog = (Dog) animal; // Causes a ClassCastException
+```
+
+
+### Why Use Casting?
+
+1.  **For Compatibility**: When dealing with mixed data types (e.g., combining integers and floating-point numbers), casting can be necessary to ensure proper calculations or to match method signatures.
+2.  **To Avoid Loss of Precision**: When performing mathematical operations where precision is critical, you might cast integers to floating-point numbers (e.g., `int` to `double`).
+    

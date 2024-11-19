@@ -37,35 +37,7 @@
 java -version
 ```
 
-## Virtual Environments with SDKMAN
-
-- **SDKMAN**: A tool to manage parallel versions of multiple SDKs, including Java.
-
-### Installation
-
-```bash
-curl -s "https://get.sdkman.io" | bash
-source "$HOME/.sdkman/bin/sdkman-init.sh"
-```
-
-### Usage
-
-- **List Available Java Versions**:
-    ```bash
-    sdk list java
-    ```
-
-- **Install a Version**:
-    ```bash
-    sdk install java 11.0.11-open
-    ```
-
-- **Switch Between Versions**:
-    ```bash
-    sdk use java 11.0.11-open
-    ```
-
-## Summary of Java vs. JavaFX
+## Java vs. JavaFX
 
 - **Swing**: Older, stable, widely used for enterprise applications.
 - **JavaFX**: Modern, supports rich UI features like CSS and multimedia.
@@ -74,8 +46,6 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 - **Swing**: Simple GUIs, legacy systems.
 - **JavaFX**: Modern applications with rich graphics.
-
-
 
 ## Hello world
 ```java
@@ -97,14 +67,6 @@ The `main` method is a special method in Java that serves as the entry point for
 - **`void`**: The method does not return any value.
 - **`main`**: This is the name of the method, which is predefined by the JVM as the entry point of the program.
 - **`String[] args`**: The method takes a single argument: an array of `String` objects. This array can hold any command-line arguments that are passed when the program is run.
-
-### `System.out.println("Hello, World!");`
-
-This line prints the string `"Hello, World!"` to the console. 
-
-- **`System`**: A class in the `java.lang` package.
-- **`out`**: A static member of the `System` class, which is an instance of `PrintStream`. It's used to output text to the console.
-- **`println`**: A method of the `PrintStream` class that prints the specified string followed by a newline character.
 
 ### Why is the `main` Method Important?
 

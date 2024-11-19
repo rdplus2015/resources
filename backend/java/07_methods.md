@@ -1,6 +1,6 @@
-# Java Functions (Methods)
+# Java Functions 
 
-## What is a Function (Method) in Java?
+## What is a Function (Public Static Method) in Java
 A function (referred to as a method in Java) is a block of code that performs a specific task. Methods in Java allow for code reusability and better organization. Every Java application must have at least one function, which is the `main` function. It serves as the entry point for running your code.
 
 ### Example: The `main` Function
@@ -33,7 +33,7 @@ This function `addNumbers` takes two integer parameters and returns their sum. I
 
 ## Return Value and `void` in Java
 
-### Returning a Value
+### `return` - Returning a Value
 
 Returning a value from a method means that after performing a task, the method provides a result to the caller. Good practice suggests returning values when appropriate.
 
@@ -62,7 +62,7 @@ public static int multiplyNumbers(int a, int b) {
 }
 
 // Another method prints the result
-public void displayResult(int result) {
+public static void displayResult(int result) {
     System.out.println("The result is: " + result);
 }
 ```
@@ -92,40 +92,12 @@ It is a good practice to document your functions using Java comments. This can b
  * 
  */
 
-public int addNumbers(int a, int b) {
+public static int addNumbers(int a, int b) {
     return a + b;
 }
 
 ```
-
-## Scope of Variables in Java
-
-The **scope** of a variable refers to where in the code the variable is accessible. In Java, variables can be:
-
--   **Local Variables**: Declared inside a method and accessible only within that method.
--   **Instance Variables**: Declared inside a class but outside methods, accessible by all methods within the class.
--   **Class Variables (Static)**: Declared with the `static` keyword, shared across all instances of the class.
-
-### Example: Local vs. Instance Variables
-```java
-public class Example {
-    string message = "welcome my objects"; // shared by all instances of the class.
-
-    int instanceVar = 10; // Instance variable
-
-    public static void display() {
-        int localVar = 5; // Local variable
-        System.out.println("Instance var: " + instanceVar);
-        System.out.println("Local var: " + localVar);
-    }
-}
-```
-in this example:
-
--   `instanceVar` is accessible across methods in the class.
--   `localVar` is only accessible within the `display` method.
-
----
+**Local Variables**: Declared inside a method and accessible only within that method.
 
 # Built-in Functions: Essential Methods in Java
 

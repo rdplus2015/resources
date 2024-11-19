@@ -1,8 +1,8 @@
-## Loops in Java
+# Loops in Java
 
 Loops allow you to repeat a block of code multiple times based on a condition. Java provides several types of loops, each serving a specific use case.
 
-### 1. For Loop
+## For Loop
 
 The `for` loop is typically used when you know in advance how many times you want to repeat a block of code.
 
@@ -26,7 +26,26 @@ for (int i = 0; i < numbers.length; i++) {
     System.out.println(numbers[i]);
 }
 ```
-### 2. While Loop
+
+## Foreach Loop
+```java
+for (Variable type: collection) {
+        // Instructions to execute for each element
+        }
+        
+/* Example */ 
+
+int[] numbers = {1, 2, 3, 4, 5};
+
+for (int number: numbers) {
+        System.out.println(number);
+}
+```
+- **Type**: The type of elements in the collection or array.
+- **variable**: A temporary variable that represents each element at each iteration.
+- **collection**: The collection or table to browse.
+
+## While Loop
 
 The `while` loop repeats a block of code as long as a given condition is true.
 
@@ -49,7 +68,7 @@ while (guess != target) {
 System.out.println("You guessed it!");
 ```
 
-#### Special Forms of `while`:
+### Special Forms of `while`:
 
 -   **`while(true)`**: This creates an infinite loop, which will continue until explicitly stopped by a `break` statement.
 
@@ -80,7 +99,7 @@ for (int i = 0; i < 10; i++) {
 }
 ```
 
-### 3. Nested Loops
+## Nested Loops
 
 You can use loops inside other loops. This is particularly useful for working with multi-dimensional arrays or performing more complex iterations.
 
@@ -92,7 +111,7 @@ for (int i = 0; i < 3; i++) {
     }
 }
 ```
-### 4. Do-While Loop
+## Do-While Loop
 
 The `do-while` loop is similar to the `while` loop, but it guarantees that the code inside the loop will be executed at least once, even if the condition is false from the start.
 

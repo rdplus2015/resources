@@ -147,22 +147,6 @@ Here is a list of primitive types and their corresponding wrapper classes:
      int primitive = obj; // Unboxing: Integer is converted back into int
      ```
 
-## Complete Example
-
-```java
-public class WrapperExample {
-    public static void main(String[] args) {
-        int primitive = 5;
-        Integer obj = primitive; // Autoboxing
-
-        System.out.println("Value of Integer object: " + obj);
-
-        int primitiveAgain = obj; // Unboxing
-        System.out.println("Value after Unboxing: " + primitiveAgain);
-    }
-}
-```
-
 ## 6. Getting User Input (Using Scanner Class)
 
 - To retrieve input from the user, use the `Scanner` class.
