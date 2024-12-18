@@ -41,6 +41,54 @@
 - **`grid-auto-columns` / `grid-auto-rows`**: Defines sizes of implicitly created columns/rows.
   - Example: `grid-auto-columns: 1fr;` or `grid-auto-rows: minmax(100px, auto);`
 
+## Parent vs. Child in CSS Grid
+
+| **Role**             | **Applies To**                 | **Key Properties**                                |
+|-----------------------|--------------------------------|--------------------------------------------------|
+| **Grid Layout**       | Parent (Grid Container)       | `display: grid`, `grid-template-columns`, `grid-template-rows`, `gap` |
+| **Item Placement**    | Children (Grid Items)         | `grid-column`, `grid-row`, `justify-self`, `align-self` |
+| **Alignment**         | Both (Parent and Children)    | Parent: `justify-items`, `align-items` <br> Child: `justify-self`, `align-self` |
+
+-   **Parent**: Defines the grid structure (columns, rows, spacing).
+-   **Child**: Controls how items are placed within the grid (position, span).
+-   Use parent styles to control the overall layout, and child styles to customize individual items' behavior.
+
+### Example 
+
+**define equal columns and don't modify the children’s placement, each child will automatically occupy a single column.**
+
+```css
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    gap: 10px;
+}
+
+.child {
+    background-color: lightblue;
+    padding: 20px;
+    text-align: center;
+}
+
+```
+**Even if the columns are equal, you can use the grid-column property on child elements to make them span multiple columns (or parts of columns).**
+```css
+.child:nth-child(1) {
+    grid-column: 1 / 3; /* Spans the first and second columns */
+}
+.child:nth-child(2) {
+    grid-column: 2 / 4; /* Spans the second and third columns */
+}
+.child:nth-child(3) {
+    grid-column: 3 / 4; /* Occupies the last column */
+}
+
+```
+-   The first child spans across the first and second columns.
+-   The second child spans across the second and third columns.
+-   The third child only occupies the last column.
+
+
 ## Advanced Grid Features
 
 - **`grid-template-areas`**: Defines named grid areas for easier layout management.
