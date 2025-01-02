@@ -97,7 +97,11 @@ public static int addNumbers(int a, int b) {
 }
 
 ```
-**Local Variables**: Declared inside a method and accessible only within that method.
+## Notes
+- **Local Variables**: Declared inside a method and accessible only within that method.
+- **Syntax to call a static method:** `ClassName.methodName();`
+
+--- 
 
 # Built-in Functions: Essential Methods in Java
 

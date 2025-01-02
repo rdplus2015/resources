@@ -82,5 +82,3 @@ public class Main {
 This encapsulation model keeps your object's data safe and offers controlled access through methods.
 
 
---- 
-

@@ -1,7 +1,25 @@
 
 # Java
+--- 
 
-## Introduction to Java
+## How Java Works: Overview of Compilation and Execution
+Java is a platform-independent, high-level programming language. Its execution involves the following key steps:
+### **1. Writing Code**
+- **Source Code**: Java programs are written in `.java` files using human-readable syntax.
+### **2. Compilation**
+- **Java Compiler (`javac`)**: The `.java` file is compiled into **bytecode** (.class files), which is an intermediate, platform-independent representation of the code.
+- **Error Checking**: During compilation, syntax errors and some logical errors are detected.
+### **3. Execution**
+- **Java Virtual Machine (JVM)**: Executes the bytecode on a specific machine.
+    - The JVM translates bytecode into **machine code** using a **Just-In-Time (JIT)** compiler.
+    - The JVM is platform-specific, but bytecode is universal.
+### **4. Platform Independence**
+- Java achieves its "Write Once, Run Anywhere" promise because:
+    - The **bytecode** is the same regardless of the operating system.
+    - The JVM adapts the bytecode to the specific OS and hardware.
+---
+
+## Keywords
 
 - **Java SE** (Standard Edition): The core platform for general-purpose applications.
 - **Java EE** (Enterprise Edition): Extensions for enterprise applications.
