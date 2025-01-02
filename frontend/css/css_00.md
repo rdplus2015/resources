@@ -51,3 +51,4 @@
 - [Meyerweb Reset CSS](https://meyerweb.com/eric/tools/css/reset/) - A popular CSS reset stylesheet.
 - [Mini Reset CSS](https://jgthms.com/minireset.css/) - A minimal CSS reset.
 - [Normalize CSS](https://necolas.github.io/normalize.css/) - A modern CSS reset.
+- [Animista](https://animista.net/play/basic/slide-fwd) - Animasta

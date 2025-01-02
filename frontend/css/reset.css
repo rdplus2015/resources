@@ -1,5 +1,5 @@
 
-/* 
+/*
     === Reset and Base Normalization ===
     This CSS file provides a standardized style across all browsers.
     It resets the default margins and paddings and sets key values
@@ -13,15 +13,17 @@
     --color-link-hover: #0056b3; /* Color on hover for links */
 
     --color-input-border: #ccc; /* Color for input field borders */
+    --color-border:  rgba(255, 255, 255, 0.1);  /*border color*/
     --color-btn-bg: #007bff; /* Background color for buttons */
-    --color-btn: #fff; /* Text color for buttons */ 
+    --color-btn: #fff; /* Text color for buttons */
     --color-btn-hover: #0056b3; /* Background color for buttons on hover */
 
     --color-main: #f0f4f8; /* Color for main text */
     --color-main-sec: #ccc; /* Color for main text */
+    --color-main-light: #ccccccaf; /* Color for main text */
     --color-main-bg: #0d1117; /* Color for the main background of the page */
     --color-main-bg-sec:  #151b23; /* Color for the secondary background of the page */
-    
+
     --size-main: 16px; /* Base font size */
     --font-main: "Roboto Flex", sans-serif; /* Sans-serif font for the text */
     --mxw-container: 1075px; /* Maximum width for the container */
@@ -47,11 +49,10 @@ body {
 
 /* === Block Element Behavior === */
 nav, article, aside, div, header, footer, section {
-    display: block; /* Ensures these elements are displayed as block-level elements */
-    width: 100%; /* Sets width to 100% for full responsiveness */
+    display: block;  /* Ensures these elements are displayed as block-level elements */
+    max-width:100%; /* Sets width to 100% for full responsiveness */
     padding: 10px; /* Adds default padding to all block elements */
 }
-
 
 /* Container for the principals section */
 .container {
