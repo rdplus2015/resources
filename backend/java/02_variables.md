@@ -216,3 +216,4 @@ public class Main {
 
 To avoid the `nextLine` trap, always consume the newline character left by previous Scanner methods before calling `nextLine()`.
 Adding `scanner.nextLine()` after `nextInt()` and `others` ensures that any leftover newline characters are consumed, allowing `nextLine()` to work correctly.
+

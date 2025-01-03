@@ -51,4 +51,10 @@
 - [Meyerweb Reset CSS](https://meyerweb.com/eric/tools/css/reset/) - A popular CSS reset stylesheet.
 - [Mini Reset CSS](https://jgthms.com/minireset.css/) - A minimal CSS reset.
 - [Normalize CSS](https://necolas.github.io/normalize.css/) - A modern CSS reset.
-- [Animista](https://animista.net/play/basic/slide-fwd) - Animasta
+- [FLowbit](https://flowbite.com/icons/) - SVG
+- [Heroicons](https://heroicons.com/)-SVG 
+- [Color-hex](https://www.color-hex.com/color-palette/81190) - Color Palette
+- [Animista](https://animista.net/play/basic/slide-fwd) 
+- [Dribble](https://dribbble.com/shots/following) 
+- [CodePen](https://codepen.io/)
+- [Dark Template](https://darktemplate.webflow.io/) 

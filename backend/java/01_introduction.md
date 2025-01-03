@@ -1,6 +1,5 @@
 
 # Java
---- 
 
 ## How Java Works: Overview of Compilation and Execution
 Java is a platform-independent, high-level programming language. Its execution involves the following key steps:
@@ -54,16 +53,6 @@ Java is a platform-independent, high-level programming language. Its execution i
 ```bash
 java -version
 ```
-
-## Java vs. JavaFX
-
-- **Swing**: Older, stable, widely used for enterprise applications.
-- **JavaFX**: Modern, supports rich UI features like CSS and multimedia.
-
-### When to Use
-
-- **Swing**: Simple GUIs, legacy systems.
-- **JavaFX**: Modern applications with rich graphics.
 
 ## Hello world
 ```java
@@ -184,9 +173,3 @@ The Java API is divided into several components:
 3. **JavaFX API**: For building rich graphical user interfaces (GUIs).
 
 4. **Spring Framework** (third-party API): Although not included in Java SE/EE, it is widely used for developing Java applications, providing features for dependency injection, transaction management, and more.
-
-## Benefits of the Java API
-
--   **Abstraction**: The API hides complex internal details, allowing you to focus on business logic.
--   **Large Ecosystem**: Java offers a vast set of standardized APIs for a variety of applications.
--   **Community Support**: A large community supports the development of new libraries and frameworks compatible with the Java API.
