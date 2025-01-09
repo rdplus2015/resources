@@ -33,5 +33,7 @@ will be moved. However, you can easily recreate the virtual environment on the n
 - `django-admin --help` -  get help on django-admin
 - `python manage.py runserver` -  run the server
 - `python manage.py migrate` - make the first migration
+- `python manage.py createsuperuser` - Create a superuser (for the administration and administration interface)
+
 
 [Documentation](https://docs.djangoproject.com/en/5.0/intro/install/)
