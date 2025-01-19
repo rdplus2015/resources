@@ -74,51 +74,116 @@ sudo apt update
 
 - Add a file to the staging area:
   ```bash
-  git add <file_name>
+  git add <file_name> #  or git add file1.txt file2.txt 
   ```
 
 - Add all modified files to the staging area:
   ```bash
-  git add .
+  git add . # or git add *.txt 
   ```
 
 - Remove files from the staging area:
 
   ```bash
-  git restore --staged <files>  # or git reset (The file is still tracked by Git.)
+  git restore --staged <files>  # Part of new commands introduced to clarify Git operations 
+  git reset  # Older command and can do other more complex operations on commits.
+  
+  #removes the specified files from the index, unstaging them, but keeps their changes in the working tree (the file is still modified but not prepared for commit).
   ```
 - removes files from the staging area
   ```bash
-  git rm -r --cached <files> # Git stops tracking the file altogether.
+  git rm -r --cached <files> 
+  # This command removes files from the staging area (index) and stops tracking files in Git version tracking, while leaving the files intact on disk.
   # Use this command when you want Git to stop tracking a file that is already versioned.
   ```
+### Commit 
+
 - Create a commit with a message:
   ```bash
-  git commit -m "enter your message here"
+  git commit -m "enter your message here"  # or git commit 
   ```
 
 - See differences between the working directory and the index:
   ```bash
-  git diff <file_name> # Shows you what you modified in your file before doing git add.
+  git diff <file_name> 
+  # Shows you what you modified in your file before doing git add command
+  # This will show you the differences between the current version of the file in your working directory and the one in the last commit.
   ```
 
 - See differences after staging:
   ```bash
-  git diff --cached # Shows you what is already in the staging area and ready to be committed in the next commit.m  
+  git diff --cached # Shows you what is already in the staging area and ready to be committed in the next commit 
   ```
+- Remove a Commit that Has Not Been Pushed 
 
+  If you've committed changes locally that you don't want to keep, you can remove them before pushing.
+  **Reset to the Previous Commit**
+     ```bash
+     git reset --soft HEAD~1
+     ```
+
+     -  use `--soft` keeps your changes staged.
+     -  Use `--mixed` to unstage the changes.
+     -  Use `--hard` to discard the changes completely.
+
+     Warning: Using `--hard` will permanently delete your changes.
+
+
+- Remove a Commit that has been pushed
+If you have already pushed a commit to GitHub and want to remove it, you'll need to **force push** the changes.
+
+  1. **Remove or rebase the commit locally**:
+     - Use `git reset` to remove the commit from your local history.
+     - You can also use `git rebase` if you need to modify the commit history.
+
+  2. **Force push to the remote repository**:
+     Since you're rewriting the history, you will need to use the `--force` option when pushing to the remote repository:
+     ```bash
+     git push origin <branch-name> --force
+     ```
+     - This ensures that you won't accidentally overwrite changes made by others.
+     ```bash 
+     git push origin <branch-name> --force-with-lease
+     ```
+### Safety Tips
+
+- Use `git reflog` to recover from accidental resets.
+- Always backup important changes before performing destructive operations.
+- Communicate with your team when rewriting commit history in shared repositories.
+- Use  [BFG Repo-Cleaner](https://rtyley.github.io/bfg-repo-cleaner/) or `git filter-branch` to rewrite Git history.
+
+
+### Revert to a Previous Commit
+
+Reverting to a previous commit can be done if you want to discard recent changes and start from a specific commit.
+
+1. **Find the Commit Hash**
+
+   First, identify the hash of the commit you want to revert to. You can use the following command to list your commits:
+
+   ```bash
+   git log --oneline
+   ```
+2. **Checkout to the Specific Commit** 
+
+   Once you have identified the commit hash, you can check out to that specific commit using:
+   ```bash
+   git checkout <commit-hash>
+   ```
+3. **Create a New Branch from the Previous Commit**
+
+   It is a good practice to create a new branch from this commit so that you can continue working from this point:
+
+   ```bash
+   git checkout -b <new-branch-name>
+   ```
 ---
 
-## History and Inspection
+## History, Inspection and Tag
 
 - Show commit history:
   ```bash
-  git log
-  ```
-
-- Show a specific number of commits:
-  ```bash
-  git log -n <number>
+  git log # or git log -n <number> (Show a specific number of commits:)
   ```
 
 - Show details of a specific commit:
@@ -128,12 +193,7 @@ sudo apt update
 
 - Checkout an old commit:
   ```bash
-  git checkout <commit_SHA>
-  ```
-
-- Checkout the latest commit on the default branch:
-  ```bash
-  git checkout main
+  git checkout <commit_SHA> # or git checkout main (Checkout the latest commit on the default branch)
   ```
 
 - Tag a commit:
@@ -174,9 +234,12 @@ sudo apt update
   git remote set-url origin <new_url>
   ```
 
-- Push to a remote repository:
+- Push to a remote repository for the first time:
   ```bash
-  git push -u origin main
+  git push -u origin main # git push --set-upstream origin feature-branch 
+  ```
+  ```bash
+  git push  # Git will automatically know which remote branch to use.
   ```
 
 - Push tags to a remote repository:
@@ -250,27 +313,27 @@ sudo apt update
 
 - Save changes temporarily:
   ```bash
-  git stash
+  git stash # This moves uncommitted changes to a temporary stack.
   ```
 
 - List stashed changes:
   ```bash
-  git stash list
+  git stash list # Displays the list of saved stashes.
   ```
 
 - Apply stashed changes:
   ```bash
-  git stash apply
+  git stash apply # This applies changes from the last stash without removing it from the stack.
   ```
 
 - Apply and remove stashed changes:
   ```bash
-  git stash pop
+  git stash pop # This applies the changes from the last stash and removes it from the stack.
   ```
 
 - Drop a specific stash:
   ```bash
-  git stash drop <stash@{n}>
+  git stash drop <stash@{n}> # Replace n with the number of the stash you want to delete.
   ```
 
 - Clear all stashes:
@@ -281,7 +344,7 @@ sudo apt update
   ### Advanced Usage
 - Stash with a descriptive message:
   ```bash
-  git stash save "Sauvegarde des modifications avant de revenir à un ancien commit"
+  git stash save "Description"
   ```
 - Stash only tracked files:
 
@@ -299,103 +362,14 @@ sudo apt update
 - Merge branches:
   ```bash
   git merge <branch_name>
+  # Keep the history of both branches and create a merge commit (contains changes from two parents) with two parents
+  # The history may become more complex with divergent commits.
   ```
 
 - Rebase branches:
   ```bash
   git rebase <branch_name>
+  # Rewrites history by replaying branch commits on the top of the target branch and creates new commits with different references.
+  # produces a linear and cleaner history.
   ```
 
-- Pull with rebase:
-  ```bash
-  git pull --rebase
-  ```
-
-## Understanding Differences: Merge vs Rebase
-
-### `git merge`
-- **How it works**: Combines changes from two branches into a new commit.
-- **History**: Retains the full history of both branches.
-- **Use case**: Useful in collaborative environments where you want to preserve the context of merges.
-
-### `git rebase`
-- **How it works**: Moves or combines a sequence of commits to a new base commit.
-- **History**: Creates a linear history by rewriting commits.
-- **Use case**: Ideal for cleaning up local commits before merging into a shared branch.
-
-### When to use `merge`:
-- When you need to preserve the history of how changes were combined.
-- When working in a team to show the integration of feature branches.
-
-### When to use `rebase`:
-- When you want a cleaner, linear history.
-- When preparing commits for a pull request to make the history easier to understand.
-
-## Summary
-- Use `merge` to combine branches with full context.
-- Use `rebase` to create a linear, cleaner history.
-
-
-## Revert to a Previous Commit
-
-Reverting to a previous commit can be done if you want to discard recent changes and start from a specific commit.
-
-### Steps to Revert to a Previous Commit
-
-1. **Find the Commit Hash**
-
-   First, identify the hash of the commit you want to revert to. You can use the following command to list your commits:
-
-   ```bash
-   git log --oneline
-   ```
-2. **Checkout to the Specific Commit** 
-
-   Once you have identified the commit hash, you can check out to that specific commit using:
-   ```bash
-   git checkout <commit-hash>
-   ```
-3. **Create a New Branch from the Previous Commit**
-
-   It is a good practice to create a new branch from this commit so that you can continue working from this point:
-
-   ```bash
-   git checkout -b <new-branch-name>
-   ```
-
-## Remove a Commit That Has Not Been Pushed 
-
-If you've committed changes locally that you don't want to keep, you can remove them before pushing.
-
-### Steps to Remove the Last Commit
-
-1. **Reset to the Previous Commit**
-
-   You can use the `git reset` command to remove the last commit:
-
-   ```bash
-   git reset --soft HEAD~1
-   ```
-
-   -  use `--soft` keeps your changes staged.
-   -  Use `--mixed` to unstage the changes.
-   -  Use `--hard` to discard the changes completely.
-
-   Warning: Using `--hard` will permanently delete your changes.
-
-2. **Push the Changes to GitHub**
-
-   If you have already pushed the commit to GitHub and want to remove it, you'll need to force push the changes:
-
-   ```bash
-   git push origin <branch-name> --force
-   ```
-
-### Safety Tips
-
-- Use `git reflog` to recover from accidental resets.
-- Always backup important changes before performing destructive operations.
-- Communicate with your team when rewriting commit history in shared repositories.
-- Use `BFG Repo-Cleaner` or `git filter-branch` to rewrite Git history.
-
-This cheat sheet covers the essential Git commands and concepts you need to know as a developer. For more detailed information, refer to the Git documentation or use `git help <command>`.
