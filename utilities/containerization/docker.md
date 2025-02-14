@@ -16,20 +16,7 @@ A lightweight, standalone, and executable software package that includes everyth
 ### **Docker Image**
 A template used to create Docker containers. It includes the application code and dependencies. Images are immutable and version-controlled.
 
-### **Dockerfile**
-A script containing instructions to build a Docker image. It defines the base image, dependencies, environment variables, and commands needed to run an application.
 
-### **Docker Registry**
-A storage and distribution system for Docker images. It allows developers to push and pull container images.
-
-### **Docker Hub**
-A public Docker registry where developers can share and retrieve images. It provides official images maintained by Docker and the community.
-
-### **Docker Volume**
-A storage mechanism used to persist data in Docker containers, ensuring that data is not lost when a container stops or is removed.
-
-### **Docker Network**
-A system for managing communication between Docker containers, allowing containers to communicate securely.
 
 ### **Docker Compose**
 A tool that allows defining and running multi-container applications using a `docker-compose.yml` file.
@@ -45,6 +32,7 @@ Managing multiple containers across multiple servers using tools like Docker Swa
 docker --version  # Check Docker Version
 sudo systemctl start docker  # Start Docker Service
 sudo systemctl enable docker  # Enable Docker Service
+docker login -u username # login to dockerhub 
 ```
 
 ## Working with Docker Images
@@ -66,10 +54,16 @@ docker build -t myimage:1.0 .
 docker build --build-arg NODE_ENV=production -t myimage:latest .
 
 # Tag an Image
-docker tag myimage:1.0 myrepo/myimage:latest
+docker tag myimage:1.0 myrepo_or_username/myimage:latest
 
 # Remove an Image 
 docker rmi myimage  
+
+# Help
+docker <cmd> --help
+
+# Combination of commands
+docker <cmd> -f $(docker <cmd> -aq)
 ```
 ## Dockerfile 
 
@@ -131,6 +125,12 @@ docker stop mycontainer
 
 # Remove a Container 
 docker rm mycontainer 
+
+# Help
+docker <cmd> --help
+
+# Combination of commands
+docker <cmd> -f $(docker <cmd> -aq)
 ```
 
 ## Networking in Docker
@@ -162,6 +162,11 @@ docker run --network my-network \
 -e REACT_APP_SHIPPING_API_HOST=http://shipping-and-handling \
 ecommerce-ui
 
+# Help
+docker <cmd> --help
+
+# Combination of commands
+docker <cmd> -f $(docker <cmd> -aq)
 ```
 
 ## Working with Volumes
@@ -178,6 +183,12 @@ docker run -d -v myvolume:/data --name mycontainer ubuntu:latest
 
 # Remove a Volume
 docker volume rm myvolume
+
+# Help
+docker <cmd> --help
+
+# Combination of commands
+docker <cmd> -f $(docker <cmd> -aq)
 ```
 
 ## Docker Compose
@@ -249,8 +260,17 @@ volumes:
 ```
 
 ```sh
-docker-compose up -d # Run a Compose Stack
-docker-compose down # Stop Compose Stack
+ # Run a Compose Stack
+docker-compose up -d
+
+# Stop Compose Stack
+docker-compose down 
+
+# Help
+docker <cmd> --help
+
+# Combination of commands
+docker <cmd> -f $(docker <cmd> -aq)
 ```
 ```sh
 # used to clean up unused Docker resources, including containers, images, networks, and volumes.
@@ -262,12 +282,18 @@ docker info
 # View detailed information about a specific container
 docker inspect <container_name_or_id>
 
+# Help
+docker <cmd> --help
+
+# Combination of commands
+docker <cmd> -f $(docker <cmd> -aq)
 ```
 
-## 7. Docker Best Practices
+## Docker Best Practices
 
 - Use `.dockerignore` to exclude unnecessary files.
 - Minimize image size by using Alpine-based images.
 - Use multi-stage builds to keep images clean.
 - Keep containers stateless and use volumes for data persistence.
 - Use labels for metadata and better organization.
+- use healthcheck
