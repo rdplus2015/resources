@@ -1,125 +1,105 @@
-tape 4 : Structures de Contrôle
+# Control Structures
 
-Les structures de contrôle permettent de prendre des décisions ou de répéter des actions en fonction de certaines conditions.
-1. Conditions : if, else, else if
+Control structures allow making decisions or repeating actions based on certain conditions.
 
-La condition if exécute un bloc de code si une condition est vraie. On peut utiliser else ou else if pour d'autres cas.
+## 1. Conditions: `if`, `else`, `else if`
+
+The `if` statement executes a block of code if a condition is true. You can use `else` or `else if` for other cases.
 
 ```javascript
-
 let age = 20;
 
 if (age >= 18) {
-    console.log("Vous êtes majeur.");
+    console.log("You are an adult.");
 } else {
-    console.log("Vous êtes mineur.");
+    console.log("You are a minor.");
 }
 
-let heure = 15;
+let hour = 15;
 
-if (heure < 12) {
-    console.log("Bonjour !");
-} else if (heure < 18) {
-    console.log("Bon après-midi !");
+if (hour < 12) {
+    console.log("Good morning!");
+} else if (hour < 18) {
+    console.log("Good afternoon!");
 } else {
-    console.log("Bonsoir !");
+    console.log("Good evening!");
 }
 ```
 
-Top ! Continuons avec les structures de contrôle. 🚦
-Étape 4 : Structures de Contrôle
+## 2. `switch` Statement
 
-Les structures de contrôle permettent de prendre des décisions ou de répéter des actions en fonction de certaines conditions.
-1. Conditions : if, else, else if
-
-La condition if exécute un bloc de code si une condition est vraie. On peut utiliser else ou else if pour d'autres cas.
-
-let age = 20;
-
-if (age >= 18) {
-    console.log("Vous êtes majeur.");
-} else {
-    console.log("Vous êtes mineur.");
-}
-
-let heure = 15;
-
-if (heure < 12) {
-    console.log("Bonjour !");
-} else if (heure < 18) {
-    console.log("Bon après-midi !");
-}
-
-2. Le switch
-
-Le switch est utile pour comparer une variable à plusieurs valeurs possibles.
+The `switch` statement is useful for comparing a variable to multiple possible values.
 
 ```javascript
-let jour = "mardi";
+let day = "Tuesday";
 
-switch (jour) {
-    case "lundi":
-        console.log("Début de la semaine.");
+switch (day) {
+    case "Monday":
+        console.log("Start of the week.");
         break;
-    case "mardi":
-    case "mercredi":
-        console.log("Milieu de la semaine.");
+    case "Tuesday":
+    case "Wednesday":
+        console.log("Middle of the week.");
         break;
-    case "vendredi":
-        console.log("Presque le week-end !");
+    case "Friday":
+        console.log("Almost the weekend!");
         break;
     default:
-        console.log("Jour inconnu.");
+        console.log("Unknown day.");
 }
 ```
 
+## 3. Loops: `for`, `while`, `do...while`
 
+### `for` Loop
 
-
-
-3. Boucles : for, while, do...while
-
-    for : Utilisée pour répéter un bloc un nombre précis de fois.
+Used to repeat a block of code a specific number of times.
 
 ```javascript
-    for (let i = 1; i <= 5; i++) {
-    console.log("Itération numéro :", i);
+for (let i = 1; i <= 5; i++) {
+    console.log("Iteration number:", i);
 }
 ```
 
-Le for...of est une boucle en JavaScript qui permet d'itérer sur des éléments d'objets itérables (comme des tableaux, des chaînes de caractères, des ensembles (Set), ou des cartes (Map)). C'est une manière simple et élégante d'accéder directement aux valeurs.
-élément : Chaque valeur de l'objet itérable est assignée à cette variable à chaque itération.
-iterable : Un objet itérable, comme un tableau, une chaîne de caractères, un Set, ou un Map.
+### `for...of` Loop
+
+The `for...of` loop allows iterating over elements of iterable objects (like arrays, strings, sets, or maps). It provides a simple way to access values directly.
+
 ```javascript
-const fruits = ["pomme", "banane", "orange"];
+const fruits = ["apple", "banana", "orange"];
 
 for (const fruit of fruits) {
     console.log(fruit);
 }
-// Résultat :
-// pomme
-// banane
+// Output:
+// apple
+// banana
 // orange
 ```
 
-while : Répète tant qu'une condition est vraie.
+### `while` Loop
+
+Repeats as long as a condition is true.
 
 ```javascript
-let compteur = 1;
+let counter = 1;
 
-while (compteur <= 3) {
-    console.log("Compteur :", compteur);
-    compteur++;
+while (counter <= 3) {
+    console.log("Counter:", counter);
+    counter++;
 }
 ```
-do...while : Exécute au moins une fois, puis vérifie la condition.
+
+### `do...while` Loop
+
+Executes at least once, then checks the condition.
 
 ```javascript
 let x = 1;
 
 do {
-    console.log("Valeur de x :", x);
+    console.log("Value of x:", x);
     x++;
 } while (x <= 3);
 ```
-e
+
