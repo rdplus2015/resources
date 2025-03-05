@@ -125,30 +125,53 @@ console.log(tax); // 20
 
 ```javascript
 // String (text)
-let message = "Hello!";
+const message = "Hello!";
 
 // Number (numbers)
-let year = 2024;
-let temperature = -5.5;
+const year = 2024;
+const temperature = -5.5;
 
 // Boolean (logical values)
-let isActive = true;
-let isEmpty = false;
+const isActive = true;
+const isEmpty = false;
 
 // Null (no value)
-let nothing = null;
+const nothing = null;
 
 // Undefined (not defined)
-let unknown;
+const unknown;
 
 // Object (complex data)
-let user = {
+const user = {
     name: "Alice",
-    age: 30
+    [sex]: 'M',
+    age: 30,
+    notes: [0, 1, 2, 3],
+    job: {
+        title: 'designer',
+        phone: '123-123-123'
+    }
 };
 
 // Array (arrays)
-let colors = ["red", "green", "blue"];
+const colors = ["red", "green", "blue"];
+```
+
+###  **Difference between Primitives and Objects in memory**
+
+- **Primitive types** (`string`, `number`, `boolean`, `null`, `undefined`, `symbol`, `bigint`) are stored **directly in memory**.
+- **Objects** (`array`, `object`, `function`) are stored by **reference**, that is, a variable does not directly contain the object, but **a pointer to the object in memory**.
+
+```javascript
+// Deep copy 
+
+const obj1 = { name: "Alice", details: { age: 25 } };
+const obj2 = structuredClone(obj1);
+
+obj2.details.age = 30;
+
+console.log(obj1.details.age); // 25 ✅ (not affected)
+console.log(obj2.details.age); // 30
 ```
 
 ## Operators
@@ -165,6 +188,8 @@ console.log("Addition:", a + b); // 13
 console.log("Subtraction:", a - b); // 7
 console.log("Multiplication:", a * b); // 30
 console.log("Division:", a / b); // 3.333...
+console.log(Math.trunc(7 / 3));  // 2
+
 console.log("Modulo (remainder):", a % b); // 1
 ```
 

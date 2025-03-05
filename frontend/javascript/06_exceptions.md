@@ -1,4 +1,4 @@
-# Error Handling Tutorial
+# Error Handling 
 
 ## Introduction
 In JavaScript, handling errors effectively is crucial to building robust and reliable applications. This guide will cover the primary methods for error handling in JavaScript, including using the `throw` statement, custom error classes, and the `try...catch` block.

@@ -18,7 +18,6 @@ console.log(str.toUpperCase()); // Method from String.prototype
 
 1. **Prototype Functions**: 
    - Prototypes in JavaScript are themselves objects that can have their own methods and properties.
-   - The type of a prototype is `function`.
 
 2. **Static Methods and Properties**: 
    - Defined using the `static` keyword.
@@ -41,7 +40,7 @@ console.log(str.toUpperCase()); // Method from String.prototype
 
 ---
 
-## Step 6: Classes in JavaScript
+## Classes in JavaScript (Create a prototype)
 
 ### 1. Defining a Class
 
@@ -129,3 +128,50 @@ const circle = new Circle(10);
 console.log("Diameter:", circle.diameter); // 20
 circle.diameter = 50;
 console.log("New radius:", circle.radius); // 25
+```
+
+### example 
+
+```javascript
+class Student {
+
+// The property will be automatically placed on the object when it is constructed
+notes = []
+
+// The constructor method allows you to indicate how the type will be constructed
+constructor (firstname, lastname) {
+// this will allow you to access the constructed object
+this.firstname = firstname
+this.lastname = lastname
+}
+
+// We can add methods, this will refer to the object on which we will use the method
+addNote (note) {
+this.notes.push(note)
+}
+
+// We can create getters, these are sorts of magic properties that have a logic
+get fullname () {
+return `${this.firstname} ${this.lastname}`
+}
+
+get moyenne () {
+let sum = 0
+for (let note of this.notes) {
+sum += note
+}
+return sum / this.notes.length
+}
+
+// We can also create setters to add logic
+    set name (str) {
+        const items = str.split(' ')
+        this.firstname = items[0]
+        this.lastname = items[1]
+    }
+
+}
+
+// Setters/getters cannot have the same name as a property 
+
+```

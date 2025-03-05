@@ -41,25 +41,46 @@ function add(a, b) {
 let result = add(5, 3);
 console.log("Result:", result); // 8
 ```
+- ✔️ Good readability
+- ✔️ Hoisting (can be called before its definition)
+- ❌ Longer to write
 
-## 4. Arrow Functions
 
-A simplified syntax for defining functions:
+## 4. Anonymous function (Stored in a variable)
+
+```javascript 
+const sayHello = function(name) {
+    return "Hello " + name;
+};
+console.log(sayHello("Bob"));
+```
+- ✔️ Useful if you want to pass the function as a parameter
+- ❌ No hoisting
+
+## 5. Arrow function (`=>`)
 
 ```javascript
-// Classic function
-function multiply(x, y) {
-    return x * y;
-}
-
-// Arrow function
-const multiply2 = (x, y) => x * y;
-
-console.log(multiply(2, 3));  // 6
-console.log(multiply2(4, 5)); // 20
+const sayHello = (name) => {
+    return "Hello " + name;
+};
+console.log(sayHello("Charlie"));
 ```
+- ✔️ Shorter syntax 
+- ✔️ No `this` (useful for objects) 
+- ❌ No hoisting
 
-### Notes on Functions:
+## 6. Even shorter arrow function (implicit return)
+```javascript
+const sayHello = (name) => "Hello " + name;
+const sayHello = name => "Hello " + name;
+console.log(sayHello("David"));
+```
+- ✔️ **Ultra short and readable**
+- ✔️ No need for `{}` or `return` for a single expression
+
+
+
+## Notes on Functions:
 
 - Functions can be called before their definition due to JavaScript's hoisting, except when the function is stored in a variable.
   - Use function definitions without variables for functions intended for global use and with variables for functions used in loops or conditions.

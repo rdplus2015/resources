@@ -60,6 +60,18 @@ for (let i = 1; i <= 5; i++) {
     console.log("Iteration number:", i);
 }
 ```
+### `for...in` loop
+
+The `for in` statement allows you to iterate over enumerable elements. It will allow you to retrieve the keys of an array or the properties of an object.
+
+```javascript
+const object = { a: 1, b: 2, c: 3 };
+
+for (const property in object) {
+  console.log(property) // will alternately display: a, b, c
+  console.log(object[property]) // access to the values 
+}
+```
 
 ### `for...of` Loop
 
