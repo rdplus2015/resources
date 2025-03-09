@@ -27,6 +27,14 @@ console.log(fruits); // ["banana"]
 fruits.unshift("strawberry");
 console.log(fruits); // ["strawberry", "banana"]
 ```
+- **`forEach()`** → Executes a function for each element (without returning a new array).
+```javascript
+const arr = [1, 2, 3];
+arr.forEach(n => console.log(n * 2)); 
+// 2
+// 4
+// 6
+```
 
 ### b. Sorting and Reversing
 - **`sort()`**: Sorts the elements of an array (default lexicographical order).

@@ -26,6 +26,27 @@ if (hour < 12) {
 }
 ```
 
+## Ternary operator
+```bash
+condition ? value_if_true : value_if_false;
+```
+```javascript
+const age = 18;
+const message = age >= 18 ? "Adult" : "Minor";
+console.log(message); // "Adult"
+```
+The `?` operator will allow optional chaining and accessing a property on an object if it exists, returning undefined if the value is null or undefined.
+
+```javascript
+// We must check if the ancestor exists before accessing the property
+if (person && person.job && person.job.salary) {
+console.log(person.job.salary.value)
+}
+```
+```javascript
+console.log(person?.job?.salary?.value)
+```
+
 ## 2. `switch` Statement
 
 The `switch` statement is useful for comparing a variable to multiple possible values.

@@ -54,6 +54,14 @@ const sayHello = function(name) {
 };
 console.log(sayHello("Bob"));
 ```
+
+```javascript 
+const sayHello = (name) {
+    return "Hello " + name;
+};
+console.log(sayHello("Bob"));
+```
+
 - ✔️ Useful if you want to pass the function as a parameter
 - ❌ No hoisting
 

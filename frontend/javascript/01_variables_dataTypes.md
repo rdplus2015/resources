@@ -265,6 +265,38 @@ num *= 2; // Equivalent to: num = num * 2
 console.log("After *=:", num); // 30
 ```
 
+### Spread operators
+
+- **Arrays**
+```javascript
+const tab1 = [4, 5, 6];
+
+const newArray1 = [...tab1, 1, 2, 3]; 
+console.log(newArray1); // [4, 5, 6, 1, 2, 3]
+
+const newArray2 = [1, 2, 3, ...tab1]; 
+console.log(newArray2); // [1, 2, 3, 4, 5, 6]
+```
+- **Object**
+```Javascript
+const person = { name: "Alice", age: 25 };
+
+const updatedPerson1 = { ...person, age: 12 };
+console.log(updatedPerson1); // { name: "Alice", age: 12 }
+
+const updatedPerson2 = { age: 12, ...person };
+console.log(updatedPerson2); // { age: 25, name: "Alice" }
+```
+
+-   If `age` is **after** `...person`, it **overwrites** the original value (`age: 25` → `age: 12`).
+-   If `age` is **before** `...person`, it gets **overwritten** by the spread (`age: 12` → `age: 25`).
+
+ **Use case**:
+
+-   `{ ...person, age: 12 }` → To update a property.
+-   `{ age: 12, ...person }` → Not very useful unless you're ensuring a default value before merging.
+
+
 ## String Manipulation
 
 ### Concatenation
