@@ -99,6 +99,26 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' ||
 }
 
 // 2. Sanitize & Validate Inputs
+
+/*
+$name = filter_input(INPUT_POST, 'name', FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW);
+$name = $name !== null ? trim(htmlspecialchars($name, ENT_QUOTES, 'UTF-8')) : '';
+
+// Recommended Best Practice for production
+$name = isset($_POST['name']) 
+    ? htmlspecialchars(trim($_POST['name']), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8', false)
+    : '';
+
+// Or as a reusable function:
+
+function clean_input($input) {
+    if (!isset($input)) return '';
+    return htmlspecialchars(trim($input), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8', false);
+}
+
+$name = clean_input($_POST['name'] ?? null);
+*/
+
 $name = htmlspecialchars(trim($_POST['name'] ?? ''));
 $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 $message = htmlspecialchars(trim($_POST['message'] ?? ''));
@@ -137,7 +157,9 @@ try {
 }
 ?>
 ```
+```php
 
+```
 ###  Key Difference Between XSS and CSRF
 
 | | XSS (Cross-Site Scripting) | CSRF (Cross-Site Request Forgery) |
