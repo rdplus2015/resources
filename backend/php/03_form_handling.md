@@ -157,9 +157,7 @@ try {
 }
 ?>
 ```
-```php
 
-```
 ###  Key Difference Between XSS and CSRF
 
 | | XSS (Cross-Site Scripting) | CSRF (Cross-Site Request Forgery) |
