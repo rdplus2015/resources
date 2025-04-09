@@ -101,6 +101,20 @@ print_r($row);
 - **Solution : `FETCH_ASSOC`**
 - **Avoids duplicates** → returns only named keys.
 - **More readable and efficient**.
+- **access elements in HTML :**  
+
+```php
+<!DOCTYPE html>
+<html>
+<body>
+    <ul>
+    <?php foreach ($result as $row): ?>
+        <li><?= htmlspecialchars($row['name']) ?></li>
+    <?php endforeach; ?>
+    </ul>
+</body>
+</html>
+```
 ##  Transactions
 
 Use transactions to execute multiple SQL statements **atomically** (all or nothing).
@@ -215,12 +229,12 @@ print_r($all);
 
 ##  Best Practices
 
-|  DO this                                | ❌ Don’t do this                            | Why?                                   |
-|-------------------------------------------|---------------------------------------------|----------------------------------------|
-| Use `PDO`                                 | Avoid `mysql_*` or raw `mysqli`             | Modern, secure, and flexible           |
-| Use `prepare()` + `execute()`             | Avoid direct variable interpolation         | Prevents SQL injection                 |
-| Use `PDO::FETCH_ASSOC`                    | Avoid default fetch (creates duplicates)    | Returns clean associative arrays       |
-| Use a `DAO` to organize your SQL logic    | Don’t mix SQL and HTML                      | Clean and maintainable architecture    |
+|  DO this                                | Don’t do this                            | Why?                                   |
+|-------------------------------------------|-------------------------------------------|----------------------------------------|
+| Use `PDO`                                 | Avoid `mysql_*` or raw `mysqli`           | Modern, secure, and flexible           |
+| Use `prepare()` + `execute()`             | Avoid direct variable interpolation       | Prevents SQL injection                 |
+| Use `PDO::FETCH_ASSOC`                    | Avoid default fetch (creates duplicates)  | Returns clean associative arrays       |
+| Use a `DAO` to organize your SQL logic    | Don’t mix SQL and HTML                    | Clean and maintainable architecture    |
 
 - **Preferred**: `prepare()` + `execute()` **in 99% of cases** (security required).
 - **Restricted cases for `exec()`**:
@@ -234,6 +248,3 @@ print_r($all);
 - **Prepared Statements** = Prevent SQL injection
 - **fetch() vs fetchAll()** = Get 1 or many rows
 - **DAO** = Organize your database code in classes
-
----
-
