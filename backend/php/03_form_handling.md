@@ -83,7 +83,9 @@ $password = "myPassword123";
 $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 // Store $hashed_password in database.
 ```
-
+**Note**
+- `filer_var`, `filter_input` with `FILTER_SANITIZE_SPECIAL_CHARS` is generally used to sanitize input before storing or processing data
+- `htmlspecialchars()` is used when outputting data into HTML to prevent by ensuring that user input is safely displayed.
 ### Secure Form Handling
 
 ```php

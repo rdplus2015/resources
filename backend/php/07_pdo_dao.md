@@ -37,12 +37,17 @@ try {
 
 Prepared statements protect your application from **SQL injection**.
 
-### 🔸 Basic Example
+###  Basic Example
 
 ```php
 // BAD (insecure)
 $email = $_POST['email'];
 $stmt = $pdo->query("SELECT * FROM users WHERE email = '$email'");
+
+$email = $_POST['email']; // Assume the user enters: ' OR 1=1 --
+$pdo->query("SELECT * FROM users WHERE email = '$email'");
+// → Risque : La requête devient SELECT * FROM users WHERE email = '' OR 1=1 --' et renvoie tous les utilisateurs !
+
 
 // GOOD (secure)
 $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
@@ -79,8 +84,23 @@ $stmt = $pdo->query("SELECT * FROM users");
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ```
 
----
-
+By default, `fetch()` returns **both an associative and indexed array** (duplicates):
+```php
+$stmt = $pdo->query("SELECT name, email FROM users");
+$row = $stmt->fetch();
+print_r($row);
+```
+```php
+[
+"name" => "Jean", // Assoc
+0 => "Jean", // Indexed (useless duplicate)
+"email" => "jean@example.com",
+1 => "jean@example.com"
+]
+```
+- **Solution : `FETCH_ASSOC`**
+- **Avoids duplicates** → returns only named keys.
+- **More readable and efficient**.
 ##  Transactions
 
 Use transactions to execute multiple SQL statements **atomically** (all or nothing).
@@ -90,8 +110,11 @@ try {
     $pdo->beginTransaction();
 
     $pdo->prepare("UPDATE accounts SET balance = balance - 100 WHERE id = 1")->execute();
+    //     $pdo->exec("UPDATE compte SET solde = solde - 100 WHERE id = 1");
+    
     $pdo->prepare("UPDATE accounts SET balance = balance + 100 WHERE id = 2")->execute();
-
+    //  $pdo->exec("UPDATE compte SET solde = solde + 100 WHERE id = 2");
+    
     $pdo->commit();
 } catch (Exception $e) {
     $pdo->rollBack();
@@ -199,6 +222,10 @@ print_r($all);
 | Use `PDO::FETCH_ASSOC`                    | Avoid default fetch (creates duplicates)    | Returns clean associative arrays       |
 | Use a `DAO` to organize your SQL logic    | Don’t mix SQL and HTML                      | Clean and maintainable architecture    |
 
+- **Preferred**: `prepare()` + `execute()` **in 99% of cases** (security required).
+- **Restricted cases for `exec()`**:
+  - **Static** queries (e.g., table creation).
+  - Internal scripts **without user variables**.
 ---
 
 ##  Summary
@@ -210,4 +237,3 @@ print_r($all);
 
 ---
 
-##  Suggested Practice
