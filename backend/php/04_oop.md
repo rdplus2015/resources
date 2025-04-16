@@ -308,3 +308,53 @@ $db->addUser("Alice");
 | **Namespace**      | Organizes classes                                         |
 | **Autoloading**    | Automatically loads files                                 |
 | **CRUD with PDO**  | Manages database with OOP principles                      |
+
+# Static Methods and Properties
+
+In PHP, **static** properties and methods belong to the **class itself** rather than any particular object instance. You can access them without creating an object using the `ClassName::` syntax.
+
+### 🔹 When to Use
+- Shared constants or values (e.g., `PI`)
+- Helper or utility methods (e.g., calculators, formatters)
+- Global counters or tracking data
+
+### 🔸 Syntax
+
+```php
+class MyClass {
+    public static $myStaticProperty = "Hello";
+
+    public static function myStaticMethod() {
+        return "This is a static method.";
+    }
+}
+
+// Accessing static members
+echo MyClass::$myStaticProperty;         // Output: Hello
+echo MyClass::myStaticMethod();          // Output: This is a static method.
+```
+
+### 🔹 Example: Static Counter
+
+```php
+class Counter {
+    public static $count = 0;
+
+    public function __construct() {
+        self::$count++;
+    }
+
+    public static function getCount() {
+        return self::$count;
+    }
+}
+
+new Counter();
+new Counter();
+echo Counter::getCount(); // Output: 2
+```
+
+### Notes
+- Use `self::` to access static members inside the class.
+- Static methods **cannot use `$this`** since they're not tied to an instance.
+- Useful for utility logic that doesn’t depend on object state.

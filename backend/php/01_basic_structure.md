@@ -11,12 +11,15 @@
 ```php
   $item = "cookies"; // str
   $sku = 25025; // int
+  $meaning += 2;   // Adds 2 to $meaning
   $price = 12.95; // float
   $is_available = true; // bool
   $color = ['red', 'yellow'] // array
 
   echo "Name: $name";
+  echo  "My name is {$name}"
   unset($item);  // destroys the variable and frees the occupied memory.
+  var_dump($name); // display structured information
 ```
 
 #### Constants
@@ -140,5 +143,64 @@ print_r($numbers); // [2, 4, 6, 8]
 unset($number); // Important to break reference
 ```
 
----
+## Strict Comparison Operators
+
+PHP provides strict comparison operators to compare both the value and the type of variables:​
+
+-   `===` : **Identical** — Returns `true` if both operands are of the same type and value.
+
+-   `!==` : **Not Identical** — Returns `true` if operands are of different types or values.
+
+
+**Example:**
+
+```php
+$a = 5;         // Integer
+$b = '5';       // String
+
+var_dump($a === $b); // Output: bool(false) — Different types
+var_dump($a !== $b); // Output: bool(true)
+```
+## 2. Binary (Bitwise) Operators
+
+Binary operators perform operations on the binary representations of integers:​
+
+-   `&` : **And** — Bits set in both operands are set.
+
+-   `|` : **Or (Inclusive Or)** — Bits set in either operand are set.
+
+-   `^` : **Xor (Exclusive Or)** — Bits set in one operand but not both are set.
+
+-   `~` : **Not** — Bits that are set are not set, and vice versa.
+
+-   `<<` : **Shift Left** — Shifts bits to the left, equivalent to multiplying by 2 for each shift.
+
+-   `>>` : **Shift Right** — Shifts bits to the right, equivalent to dividing by 2 for each shift.
+
+
+**Example:**
+```php
+$a = 6;      // Binary: 110
+$b = 3;      // Binary: 011
+
+echo $a & $b;  // Output: 2  (Binary: 010)
+echo $a | $b;  // Output: 7  (Binary: 111)
+echo $a ^ $b;  // Output: 5  (Binary: 101)
+echo ~$a;      // Output: -7 (Binary: ...11111001)
+echo $a << 1;  // Output: 12 (Binary: 1100)
+echo $a >> 1;  // Output: 3  (Binary: 011)
+```
+
+## 3. Null Coalescing Operator (`??`)
+
+Introduced in PHP 7, the `??` operator returns the first operand if it exists and is not `null`; otherwise, it returns the second operand. It's particularly useful for providing default values.​
+
+**Example:**
+```php
+$username = $_GET['user'] ?? 'guest';
+// Equivalent to:
+$username = isset($_GET['user']) ? $_GET['user'] : 'guest';
+```
+In this example, `$username` will be assigned the value of `$_GET['user']` if it exists; otherwise, it defaults to `'guest'`.
+
 
