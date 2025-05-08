@@ -348,4 +348,3 @@ try {
 ## Conclusion
 
 Custom exceptions improve clarity, reduce boilerplate error-checking code, and help build more robust and maintainable applications. In a CRUD system, separating exceptions by type is a best practice that will scale well as your application grows.
----

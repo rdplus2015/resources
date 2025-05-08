@@ -1,8 +1,6 @@
-
 # Form Handling
 
 ## Basic Form Processing
-
 
 ```html
 <!-- form.html -->
@@ -17,8 +15,8 @@
 <!-- process.php -->
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = htmlspecialchars($_POST['name'] ?? '');
-    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    $name = htmlspecialchars(trim($_POST['name'] ?? ''));
+    $email = filter_var($_POST['email'] ?? '', FILTER_VALIDATE_EMAIL);
     
     if ($email === false) {
         echo "Invalid email format";
@@ -29,22 +27,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 ```
 
-## Native methods
+## Native Methods
 
 - **Superglobals** (`$_SERVER`, `$_POST`, etc.) → Access to HTTP data.
-- **`filter_var()` / `filter_input()`** → Validation and sanitization.
+- **`filter_var()`** → Validation and sanitization.
 - **Security functions** (`htmlspecialchars()`, `password_hash()`, etc.).
-
 
 ### Useful PHP Superglobals
 
-| Variable | Description | Exemple |
+| Variable | Description | Example |
 | -- | --- | -- |
-| `$_POST` |Data from forms sent by POST. | `$_POST['email']` |
+| `$_POST` | Data from forms sent by POST. | `$_POST['email']` |
 | `$_GET` | Data passed in the URL (GET). | `$_GET['id']` |
-| `$_SERVER` |Server and query information. | `$_SERVER['REQUEST_METHOD']` |
-| `$_SESSION` | Data storage between pages.| `$_SESSION['user_id']` |
-| `$_COOKIE` | Accesses browser cookies.| `  $_COOKIE['lang']` |
+| `$_SERVER` | Server and query information. | `$_SERVER['REQUEST_METHOD']` |
+| `$_SESSION` | Data storage between pages. | `$_SESSION['user_id']` |
+| `$_COOKIE` | Accesses browser cookies. | `$_COOKIE['lang']` |
 
 ### Validation Filters (return `false` if invalid)
 
@@ -63,19 +60,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 | **`FILTER_SANITIZE_NUMBER_INT`** | Keeps only numbers and `+ -`. |
 | **`FILTER_SANITIZE_URL`** | Removes illegal characters from a URL. |
 
-```php
-$dirty_input = "<script>alert('Hack')</script>";
-$clean_input = filter_var($dirty_input, FILTER_SANITIZE_SPECIAL_CHARS);
-echo $clean_input; // Display: &lt;script&gt;alert('Hack')&lt;/script&gt;
-```
+
 ## Other Useful Security Features
 
 | Function | Use |
 | --- | --- |
 | **`htmlspecialchars()`** | Converts special characters to HTML entities (`<` → `&lt;`). |
-| **`strip_tags()`** | Removes **all** HTML tags (less flexible than `htmlspecialchars`). |
-| **`password_hash()`** | Encrypts a password (e.g., `password_hash($password, PASSWORD_BCRYPT)`). |
+| **`strip_tags()`** | Removes **all** HTML tags. |
+| **`password_hash()`** | Encrypts a password. |
 | **`mysqli_real_escape_string()`** | Escapes SQL-unsafe characters (⚠️ Less secure than PDO). |
+
+**Example**
+```php
+// Display 
+$dirty_input = "<script>alert('Hack')</script>";
+$clean_input = htmlspecialchars(strip_tags($dirty_input), ENT_QUOTES, 'UTF-8');
+echo $clean_input; // Display: &lt;script&gt;alert('Hack')&lt;/script&gt;
+
+// Store 
+$name = strip_tags(trim($_POST['name'])); // nettoyage simple
+$pdo->prepare("INSERT INTO users (name) VALUES (?)")->execute([$name]);
+
+/*
+    <strip_tags() → removes all HTML (useful if you don't want any tags)
+    htmlspecialchars() → prevents the interpretation of remaining special characters (XSS security)
+*/
+```
 
 **Example with `password_hash()`:**
 ```php
@@ -84,13 +94,13 @@ $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 // Store $hashed_password in database.
 ```
 **Note**
-- `filer_var`, `filter_input` with `FILTER_SANITIZE_SPECIAL_CHARS` is generally used to sanitize input before storing or processing data
+- `filer_var`, `filter_input` is generally used to sanitize input before storing or processing data
 - `htmlspecialchars()` is used when outputting data into HTML to prevent by ensuring that user input is safely displayed.
-### Secure Form Handling
+
+## Secure Form Handling Example
 
 ```php
 <?php
-// process.php
 session_start();
 
 // 1. Check CSRF Token
@@ -101,29 +111,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' ||
 }
 
 // 2. Sanitize & Validate Inputs
-
-/*
-$name = filter_input(INPUT_POST, 'name', FILTER_UNSAFE_RAW, FILTER_FLAG_STRIP_LOW);
-$name = $name !== null ? trim(htmlspecialchars($name, ENT_QUOTES, 'UTF-8')) : '';
-
-// Recommended Best Practice for production
-$name = isset($_POST['name']) 
-    ? htmlspecialchars(trim($_POST['name']), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8', false)
-    : '';
-
-// Or as a reusable function:
-
 function clean_input($input) {
-    if (!isset($input)) return '';
-    return htmlspecialchars(trim($input), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8', false);
+    return htmlspecialchars(trim(strip_tags($input ?? '')), ENT_QUOTES, 'UTF-8');
 }
 
-$name = clean_input($_POST['name'] ?? null);
-*/
-
-$name = htmlspecialchars(trim($_POST['name'] ?? ''));
-$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-$message = htmlspecialchars(trim($_POST['message'] ?? ''));
+$name = clean_input($_POST['name'] ?? '');
+$email = filter_var($_POST['email'] ?? '', FILTER_VALIDATE_EMAIL);
+$message = clean_input($_POST['message'] ?? '');
 
 // 3. Validate Data
 $errors = [];
@@ -160,16 +154,15 @@ try {
 ?>
 ```
 
-###  Key Difference Between XSS and CSRF
+## Key Difference Between XSS and CSRF
 
 | | XSS (Cross-Site Scripting) | CSRF (Cross-Site Request Forgery) |
 | --- | --- | --- |
 | **Type of Attack** | Injecting malicious code **into your site**. | Exploiting your session **on another site**. |
 | **Target** | Your site visitors. | You (as an admin/logged-in user). |
-| **Protection** | `htmlspecialchars()`, `strip_tags()`. | CSRF token. |
+| **Protection** | `htmlspecialchars()`, `strip_tags()` | CSRF token |
 
-
-### File Uploads
+## File Uploads
 ```php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["file"])) {
     $target_dir = "uploads/";
@@ -193,7 +186,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["file"])) {
     }
     
     // Allow certain file formats
-    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+    if (!in_array($imageFileType, ["jpg", "jpeg", "png"])) {
         echo "Only JPG, JPEG, PNG files are allowed.";
         $uploadOk = 0;
     }
@@ -207,14 +200,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["file"])) {
     }
 }
 ```
+
 ## Best Practices
 
 1. **Always escape output** (`htmlspecialchars()`).
-
 2. **Use HTTPS** to avoid MITM attacks.
-
-3. **Limit form submissions** (rate limiting).
-
+3. **Limit form submissions** (rate limiting, tokens).
 4. **Store passwords securely** (`password_hash()`).
-
-5. **Clean up file uploads** (if applicable).
+5. **Clean up file uploads** (and validate file type/size).
