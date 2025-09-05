@@ -175,8 +175,7 @@ public class Main {
 - **Actual type** = run-time → which version of the method is executed.
   - Compilation → depends on the **reference type**.
   - Runtime → depends on the **actual type of the object**.
-
-
+- Polymorphism of type allow you to put multiple subtypes in the same collection and process them in a loop.
 
     
 ### **Type Polymorphism vs. Object Polymorphism**
@@ -219,3 +218,7 @@ if (animal instanceof Dog) {
     dog.makeNoise();
 }
 ```
+
+#### Note 
+- Before casting: you only have access to methods of the parent type (Animal).
+- After casting: you can call methods of both the parent and the child type (Dog).

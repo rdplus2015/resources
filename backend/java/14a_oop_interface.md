@@ -55,6 +55,8 @@ interface Animal {
 
 While interfaces and abstract classes may appear similar, their uses differ significantly:
 
+> An abstract parent class enforces a strict “is a” relationship, while an interface expresses a “can do” capability, making the code more flexible and generic.
+
 | Feature                  | Interface                             | Abstract Class                   |
 |--------------------------|---------------------------------------|-----------------------------------|
 | Methods                  | All methods are abstract (before Java 8) | Can have both abstract and concrete methods |
