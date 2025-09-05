@@ -1,4 +1,4 @@
-## **Polymorphism in Java**
+## Polymorphism in Java
 
 ### **Definition**
 
@@ -6,47 +6,90 @@ Polymorphism is the ability of an object to take multiple forms. It is a core pr
 
 ### **Types of Polymorphism**
 
-1. **Method Overloading (Compile-time Polymorphism):**
-    - Methods with the **same name** but **different signatures** (parameters) in the same class.
+### 1. **Method Overloading (Compile-time Polymorphism or Static polymorphism):**
+
+- Methods with the **same name** but **different signatures** (parameters) in the same class.
+- Decided on compilation.
 
 ```java
-public class Calculator {
-    public int add(int a, int b) {
+class Calculator {
+    // addition of two integers
+    int addition(int a, int b) {
         return a + b;
     }
 
-    public double add(double a, double b) {
+    // addition of three integers
+    int addition(int a, int b, int c) {
+        return a + b + c;
+    }
+
+    // addition of two doubles
+    double addition(double a, double b) {
         return a + b;
+    }
+}
+
+public class TestOverloading {
+    public static void main(String[] args) {
+        Calculator calc = new Calculator();
+        System.out.println(calc.addition(2, 3));       // 5
+        System.out.println(calc.addition(2, 3, 4));    // 9
+        System.out.println(calc.addition(2.5, 3.5));   // 6.0
     }
 }
 ```
+- Here, the `addition` method has **multiple forms** depending on the parameters → this is **polymorphism by overloading**.
+> **Overloading** is the creation of **several different methods**, with the **same name**, but with different **parameters** (type, number, or order).
+  The **choice of which method** to execute is made **by the compiler** (static linking), based on the **arguments passed**.
+  This can be done **in the same class** or in a **child class**.
 
-2. **Method Overriding (Runtime Polymorphism):**
-    - Methods with the **same signature** in the parent and child classes, allowing a child class to provide its specific implementation.
+### 2. **Method Overriding (Runtime Polymorphism, Object Polymorphism, Dynamic polymorphism):**
+>Methods with the **same signature** in the parent and child classes, allowing a child class to provide its specific implementation.
+This is the override mechanism in action. The JVM always calls the version (method) of the actual object, never the one of the parent type (reference type).
+It determines which version of the method is actually executed at runtime.
 
 ```java
-public class Parent {
-    public void display() {
-        System.out.println("Method from Parent class");
+class Animal {
+    void speak() {
+        System.out.println("An animal makes a sound");
     }
 }
 
-public class Child extends Parent {
+class Dog extends Animal {
     @Override
-    public void display() {
-        System.out.println("Overridden method in Child class");
+    void speak() {
+        System.out.println("The dog barks");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    void speak() {
+        System.out.println("The cat meows");
+    }
+}
+
+public class TestPolymorphism {
+    public static void main(String[] args) {
+        Animal a1 = new Dog(); // Dog object seen as an Animal
+        Animal a2 = new Cat(); // Cat object seen as an Animal
+
+        a1.speak(); // The dog barks 
+        a2.speak(); // The cat meows 
+        
+        Dog a1 = new Dog(); // Dog object seen as an Animal
+        Cat a2 = new Cat(); // Cat object seen as an Animal
+
+        a1.speak(); // The dog barks 
+        a2.speak(); // The cat meows 
     }
 }
 ```
 
----
 
-### **Polymorphism Through Inheritance**
+### 3. Type Polymorphism (subtyping, )
 
-In Java, polymorphism relies on two main mechanisms:
-
-1. **Inheritance:** Allows child classes to inherit from parent classes.
-2. **Interfaces:** Allows classes to implement multiple contracts.
+This is a **language/compiler rule**. It simply says: "A variable of type parent can contain a child object.". This means that a **variable of type parent** can reference an **object of a child class**. This is what allows you to manipulate several different objects through the **same generic type**
 
 #### Example with Inheritance
 
@@ -113,9 +156,29 @@ public class Main {
     }
 }
 ```
+>Casting is necessary when a parent reference points to a child object, because the parent reference only provides access to methods and properties defined in the parent; to use those specific to the child, you must cast. for example: When you create a `Dog` object with an `Animal` reference, you can only call the methods defined in `Animal`, but if one of those methods is overridden in `Dog`, the `Dog` version will be executed.
 
----
 
+**Note 1 :** Polymorphism can be used through Inheritance (class) or through Interface
+- **Inheritance:** Allows child classes to inherit from parent classes.
+- **Interfaces:** Allows classes to implement multiple contracts.
+
+**Note 2 :** 
+- **Reference** = what the compiler sees (what you wrote before the `=`).
+  - This is the **declared type** of the variable.
+  - It determines **what the compiler allows** (which methods/properties you can call).
+
+- **Actual object** = what the JVM creates with `new`.
+  - It determines **which version of the method is actually executed at runtime**.
+
+- **Reference type** = compile-time → which methods are accessible.
+- **Actual type** = run-time → which version of the method is executed.
+  - Compilation → depends on the **reference type**.
+  - Runtime → depends on the **actual type of the object**.
+
+
+
+    
 ### **Type Polymorphism vs. Object Polymorphism**
 
 | **Characteristic**             | **Type Polymorphism**                                                              | **Object Polymorphism**                                                        |
@@ -125,7 +188,6 @@ public class Main {
 | **Reference vs. Object**       | Reference is of parent type, object is of child type.                             | The method invoked depends on the actual object type, not the reference type.   |
 | **Polymorphism Type**          | Occurs at the type level (during compilation).                                    | Occurs at the object level (during runtime).                                   |
 
----
 
 ### **Casting and Polymorphism**
 
@@ -157,58 +219,3 @@ if (animal instanceof Dog) {
     dog.makeNoise();
 }
 ```
-
----
-
-### **Abstract Classes and Methods**
-
-1. **Abstract Class:**
-    - Cannot create an object directly from an abstract class.
-    - Serves as a blueprint for other classes.
-
-2. **Abstract Method:**
-    - Declared without an implementation, forcing subclasses to provide one.
-
-#### Example of Abstract Class and Method
-
-```java
-abstract class Shape {
-    abstract void draw();
-}
-
-class Circle extends Shape {
-    @Override
-    void draw() {
-        System.out.println("Drawing a circle");
-    }
-}
-
-class Rectangle extends Shape {
-    @Override
-    void draw() {
-        System.out.println("Drawing a rectangle");
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        Shape shape1 = new Circle();
-        Shape shape2 = new Rectangle();
-
-        shape1.draw(); // Outputs: "Drawing a circle"
-        shape2.draw(); // Outputs: "Drawing a rectangle"
-    }
-}
-```
-
----
-
-### **Summary**
-
-- Polymorphism enables flexibility and reuse in OOP.
-- Method overloading happens at compile time, while method overriding happens at runtime.
-- Type polymorphism allows for generalized coding through parent references.
-- Object polymorphism ensures behavior is dictated by the actual object type at runtime.
-- Abstract classes and methods enable layer-by-layer abstraction and avoid code duplication.
-- Proper use of casting is crucial to leverage polymorphism effectively.
-- 

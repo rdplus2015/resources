@@ -1,3 +1,13 @@
+
+
+
+
+
+
+
+
+
+
 # Loops in Java
 
 Loops allow you to repeat a block of code multiple times based on a condition. Java provides several types of loops, each serving a specific use case.
