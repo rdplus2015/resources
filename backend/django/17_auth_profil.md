@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  # Link Profile to User model
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')  # Link Profile to User model
     bio = models.TextField(blank=True)  # Optional biography field
     location = models.CharField(max_length=100, blank=True)  # Optional location field
     birth_date = models.DateField(null=True, blank=True)  # Optional birth date field
@@ -18,19 +18,19 @@ class Profile(models.Model):
 
 ### Signals for Automatic Profile Creation and Update
 ```python
-# In signals.py of your Django application
-# File: users_profiles/signals.py
-
+from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.conf import settings
-from .models import Profile
+from .models import UserProfiles
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
+    # Creation of the profile if the user is newly created
     if created:
-        Profile.objects.create(user=instance)  # Create profile if user is created
-    instance.profile.save()  # Save profile when user is saved
+        UserProfiles.objects.create(user=instance)
+    # Save existing profile only if it is linked to the user
+    elif hasattr(instance, 'profile'):
+        instance.profile.save()
 ```
 
 **Explanation of Signals:**
@@ -38,6 +38,28 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
 - `@receiver`: A decorator that connects the function to the signal.
 - `create_or_update_user_profile`: This function creates or updates the profile automatically whenever a User instance is saved.
 - `instance.profile.save()`: Ensures the profile is updated after the user is modified.
+- `hasattr(instance, 'profile')` is used before saving the profile. This ensures that the profile exists before calling `save()` and avoids an exception if it does not.
+
+**Notes**
+- Check the `AUTH_USER_MODEL` parameter in `settings.py` 
+```python
+AUTH_USER_MODEL = 'app_name.CustomUser'
+```
+- Verify the import of signals in apps.py
+- To ensure your signals are correctly registered, you need to import them in the `ready()` method of your app's configuration.
+Python files containing your signals (`signals.py`) are not automatically executed when Django starts. You must explicitly import them somewhere so that Django knows to load the signal code.
+
+```python
+from django.apps import AppConfig
+
+class ProfilesConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'profiles'
+
+    def ready(self):
+        import profiles.signals  # Import your signals here
+```
+
 
 ### Profile Form
 ```python
@@ -55,7 +77,7 @@ class ProfileForm(forms.ModelForm):
 
 ### Views for Viewing and Editing Profile
 ```python
-# In views.py of your Django application
+#  views.py (FBV)
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -137,27 +159,20 @@ class KuilaUserProfile(models.Model):
         return f'{self.first_name} {self.last_name}'
 
 # signals.py
+
+from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.conf import settings
 from .models import KuilaUserProfile
 
-
-# Signal receiver to create or update a user profile when a user is saved
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
+    # Creation of the profile if the user is newly created
     if created:
-        # Create a KuilaUserProfile instance for the newly created user
         KuilaUserProfile.objects.create(user=instance)
-    # Update the user's profile (this is redundant with the second signal handler)
-    instance.profile.save()
-
-
-# Signal receiver to save the user profile when a user is saved
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def save_user_profile(sender, instance, **kwargs):
-    # Save the user's profile (this assumes the profile is already created)
-    instance.profile.save()
+    # Save existing profile only if it is linked to the user
+    elif hasattr(instance, 'profile'):
+        instance.profile.save()
 
     
 # views.py
@@ -197,3 +212,12 @@ class UserProfileUpdate(KuilaLoginRequiredMixin, UpdateView):
             return redirect('profile')  # Redirect if the profile does not belong to the current user
         return super().form_valid(form)  # Proceed with the form submission if the user is valid
 ```
+
+### Notes:
+
+-   Ensure that `settings.AUTH_USER_MODEL` is correctly pointing to your custom user model.
+-   The `related_name='profile'` creates a reverse relation from the user model to the `Profiles` model, which is accessible via `user.profile`.
+- **`CASCADE`**: Deletes the related object when the referenced object is deleted.
+- **`PROTECT`**: Prevents deletion of the referenced object by raising a `ProtectedError`.
+- **`SET_NULL`**: Sets the foreign key to `NULL` when the referenced object is deleted. This requires the field to allow `NULL`.
+- [Documentation](https://docs.djangoproject.com/en/5.1/ref/models/fields/#django.db.models.ForeignKey.on_delete)

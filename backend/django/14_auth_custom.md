@@ -76,7 +76,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 - Thee `password=None` means that the `password` argument is **optional** when calling `create_user`. If the caller doesn't provide a password, the method will default to `None`.  This flexibility allows you to handle different scenarios, such as when you might want to create a user without immediately setting a password (e.g., if you're doing something like sending a confirmation email or handling password reset functionality).
 
 - The AbstractBaseUser class includes a `password` field by default, even though we don't explicitly define it in your CustomUser model.
-
+- By adding `PermissionsMixin` to your `TechnoUser` model, you benefit from Django's permissions and groups management features without having to code them yourself.
 
 ## 2. **Set the Custom User Model in `settings.py` and make Migrations**
 
@@ -165,13 +165,15 @@ from django.contrib.auth import get_user_model
 # Defining a custom sign-up form that extends UserCreationForm.
 class SignUpForm(UserCreationForm):
     
+    # Adding fields explicitly here for validations
     # Adding an email field to the form, making it required.
     """
     This explicitly defines the email field in the form, making it clear that the field is required and should be of type EmailField. 
     This allows you to specify additional attributes or behaviors for the email field, such as making it required, adding validation rules, or setting default values.
     """
     email = forms.EmailField(required=True)
-
+    
+    
     # Defining metadata for the form.
     class Meta:
         # Specifying the model to use with this form, using Django's `get_user_model` to get the custom user model.
@@ -190,6 +192,11 @@ class SignUpForm(UserCreationForm):
             user.save()
         # Returning the user instance.
         return user
+        
+        """
+        Form validation handles user input errors at the user interface level, with error messages returned and displayed to the user. Model validation ensures that validation rules are applied centrally, 
+        even when the instance is created or modified without a form (e.g., via scripts or APIs), thereby ensuring data integrity.
+        """
 
 # Form for updating user information
 class UserUpdateForm(UserChangeForm):
@@ -283,16 +290,24 @@ This combination ensures that all aspects of the form's data integrity are check
 
 ```python
 # urls 
+from django.contrib.auth import views as auth_views 
+
 urlpatterns = [
-    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-    path('logout/', views.CustomLogoutView.as_view(), name='logout'),
-    path('password_reset/', auth_views.PasswordResetView.as_view(template_name='registration/password_reset_form.html'), name='password_reset'),
-    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
-    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
+    # Custom Views
+    path('signup/', UserSignupView.as_view(), name='signup'),
+    path('login/', UserLoginView.as_view(), name='login'),
+    path('logout/', UserLogoutView.as_view(), name='logout'),
     
-    path('settings/security/update/password/', auth_views.PasswordChangeView.as_view(template_name='profile/security/update_kuila_user_password.html'), name='update_kuila_user_password'),
-    path('settings/security/update/password/done/', auth_views.PasswordChangeDoneView.as_view(template_name='profile/security/password_change_done.html'), name='password_change_done'),
+    # Default Views 
+    path('password_reset/', auth_views.PasswordResetView.as_view(template_name='registration/password_reset_form.html'), name='password_reset'), # Displays a form for the user to enter their email address.
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'), # Appears after submitting the password reset form and Informs the user that the email has been sent
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'), # This view is called when the user clicks on the reset link received by email. It displays a form allowing the user to define a new password.
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'), # Displayed after the user successfully sets a new password. Informs that the password has been reset and provides instructions for logging in.
+    
+    path('settings/security/update/password/', auth_views.PasswordChangeView.as_view(template_name='profile/security/update_kuila_user_password.html'), name='update_kuila_user_password'), # Displays a form to allow the user to change their current password.
+    path('settings/security/update/password/done/', auth_views.PasswordChangeDoneView.as_view(template_name='profile/security/password_change_done.html'), name='password_change_done'), # This view is displayed after the user has successfully changed their password.
+    
+    # Custo Views (Update users informations)
     path('settings/security/update/username/', UserUpdate.as_view(), name='update_kuila_user_username'),
     path('settings/security/deletemyaccount/', DeleteUser.as_view(), name='delete_kuila_user'),
 ]

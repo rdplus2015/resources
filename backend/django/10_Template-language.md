@@ -1,29 +1,32 @@
 # Django Template Language (DTL)
 
-## variables
+## `{{ }}` (Expression tags)
+Used to display variables or evaluated expressions
+
+### variables
 - Syntax: `{{ variable }}` 
 - Example: Display a variable: `{{ user.username }}` or ` {{ object.method() }}`
 
-## Filters
+### Filters
 - Syntax: `{{ variable|filter }}`
 - Examples: Capitalize: `{{ "hello world"|capfirst }}`
 - Examples: Length: `{{ list|length }}`
 
 ### Common Filters
-- ### Text Manipulation
+- #### Text Manipulation
     - Capitalize: `{{ "hello"|capfirst }}`
     - Uppercase: `{{ "hello"|upper }}`
     - Lowercase: `{{ "HELLO"|lower }}`
     - Title: `{{ "hello world"|title }}`
-- ### List Manipulation
+- #### List Manipulation
   - Length: `{{ list|length }}`
   - Index: `{{ list.0 }}`
-- ### Others
+- #### Others
     - Date: `{{ date|date:"d-m-Y" }}`
     - Safe for HTML: `{{ unsafe_string|safe }}`
     - the safe filter allows your code to understand and interpret the tags. can be dangerous for Js tag when user must send you data.
     - we  can use it when with get some data from our db 
-  
+
 ```python
 {% autoescape off %}
     - <htmltag> </htmltag> we can use autoescape if have many place that we need to use safe filter
@@ -31,11 +34,15 @@
 { % endautoescape  %}
 ```
 
-## Tags
-- Syntax: `{% tag %}`
+--- 
+
+## `{% %}` (Control tags)
+Used for logic control instructions (loops, conditions, etc.).
+
 - Examples:
     - For: `{% for item in list %} ... {% endfor %}`
     - If: `{% if condition %} ... {% endif %}`
+
 ```python
 {% for item in list %}
     <htmltag> {{ item }}  </htmltag>
@@ -48,7 +55,7 @@
     Please log in.
 {% endif %}
 ```
-## Comment
+### Comment
 ```python
 {% comment %}
     This is a comment (template comment)
@@ -57,8 +64,8 @@
 
 `<!-- This is a html comment -->`
 
-## Template Inclusion and Inheritance
-- ### Inheritance
+### Template Inclusion and Inheritance
+- #### Inheritance
   - Inherit a parent template:
 ```python
 {% extends "base.html" %}
@@ -70,33 +77,72 @@
     This is content.
 {% endblock %}
 ```
-- ### Inclusion
+- #### Inclusion
   - Include a file or  template:
 ```python
 {% include "header.html" %}
 ```
-## URLs and Links
-- ### Including Links
-    - ### URL by name:
+
+```html
+ <!-- base.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Own Style Sheet-->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title> {% block title %} {% endblock %} </title>  <!-- Title of the HTML document defines in each file -->
+</head>
+<body> 
+    {%block main %} {% endblock %}   <!-- The main content of the HTML document ! defines in eaach file-->
+</body>
+</html>
+```
+
+```html
+ <!-- page.html -->
+{% extends "base.html" %}
+{% load static %}
+{% block title %} My Title {% endblock %}
+{%block main%} 
+    <main>
+        <!-- section -->
+        <section class="category-section">
+            
+        </section>
+    </main>
+{%endblock%}
+```
+
+### URLs and Links
+- #### Including Links
+    - #### URL by name:
 ```python
 <a href="{% url 'view-name' %}">Link</a>
 ```
-
-- ### Creating Dynamic Links
-  - ### URL with parameters:
+- #### Creating Dynamic Links
+  - #### URL with parameters:
 ```python
 <a href="{% url 'view-name' param1 param2 %}">Link</a>
 <a href="{% url 'post' slug='about-us' or slug=post.title %}">link</a>
 ```
+   - #### Next parameter:
+```python
 
-## Alias
+```
+
+### Alias
 ```python
 {% with a = post.tile  %}
     # html code here, use the alias instead of a long query 
 { % endwith  %}
 ```
-## Including Static Files
-### Loading Static Files
+### Including Static Files
+#### Loading Static Files
 - Load: 
 ```python
 {% load static %}
@@ -110,7 +156,7 @@
 {% load custom_tags %}
 ```
 
-## Forms
+### Forms
 - Simple form:
 ```python
 <form method="post">
