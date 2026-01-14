@@ -33,7 +33,17 @@ psql -U postgres -d myDB # Connect to PostgreSQL with specific user and dataBase
       ALTER ROLE mydatabaseuser SET client_encoding TO 'utf8';                              -- Set the client encoding to 'utf8' for the user
       ALTER ROLE mydatabaseuser SET default_transaction_isolation TO 'read committed';      -- Set default transaction isolation
       ALTER ROLE mydatabaseuser SET timezone TO 'UTC';                                      -- Set the timezone to 'UTC' for the user
-      GRANT ALL PRIVILEGES ON DATABASE mydatabase TO mydatabaseuser;                        -- Grant All Privileges on Database
+      GRANT ALL PRIVILEGES ON DATABASE mydatabase TO mydatabaseuser;                        -- Grant All Privileges on Database (Database only)
+      \c dbname                                                                             -- Login in to the DB
+      GRANT USAGE, CREATE ON SCHEMA public TO technouserdb;                                 -- Give the rights to the public scheme
+
+      ALTER DEFAULT PRIVILEGES IN SCHEMA public                                             -- Donner les droits par défaut sur les futures tables
+      GRANT ALL ON TABLES TO technouserdb;
+      ALTER DEFAULT PRIVILEGES IN SCHEMA public
+      GRANT ALL ON SEQUENCES TO technouserdb;
+
+      SELECT schema_name                                                                    -- test
+      FROM information_schema.schemata;
 
       -- CREATE DATABASE <database name> WITH OWNER <user name>;
       -- ALTER DATABASE <database name> OWNER TO <user name>;`
