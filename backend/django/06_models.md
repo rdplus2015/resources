@@ -13,8 +13,10 @@ class BlogPost(models.Model):
 
 ## Create and apply migrations
 ```bash
-python manage.py makemigrations
+python manage.py makemigrations # python manage.py makemigrations appName
 python manage.py migrate
+
+python manage.py sqlmigrate blog migrationName # To see the sql code
 ```
 [Documentation](https://docs.djangoproject.com/fr/5.0/ref/models/fields/#field-types)
 
