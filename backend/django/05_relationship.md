@@ -1,5 +1,5 @@
+## One-to-One
 
-## One-to-One 
 - Each person has a single passport.
 - Each passport is associated with a single person.
 
@@ -13,6 +13,7 @@ class Passport(models.Model):
     person = models.OneToOneField(Person, on_delete=models.CASCADE)
     passport_number = models.CharField(max_length=20)
 ```
+
 ```python
 # Creating objects
 person = Person.objects.create(name="John")
@@ -28,11 +29,14 @@ johns_passport.save()
 # Deleting an object
 johns_passport.delete()
 ```
-### Other examples 
+
+### Other examples
+
 - `User and Profile`: Each user has an associated profile with additional information (e.g., address, date of birth).
 - `Car and Registration Certificate`: Each car has a unique registration certificate.
 
-## One-to-Many 
+## One-to-Many
+
 - A manufacturer can produce several cars.
 - Each car has a single manufacturer.
 
@@ -46,6 +50,7 @@ class Car(models.Model):
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
     model_name = models.CharField(max_length=100)
 ```
+
 ```python
 # Creating objects
 manufacturer = Manufacturer.objects.create(name="Toyota")
@@ -63,11 +68,13 @@ car1.delete()
 ```
 
 ### Other examples
+
 - `Author and Book` : An author can write multiple books, but each book is associated with a single author.
 - `Category and Products` : A category can contain multiple products, but each product belongs to a single category.
 - `Blog and Comments` : A blog post can have several comments, but each comment is associated with a single post.
 
 ## Many-to-Many
+
 - A student can be enrolled in multiple courses.
 - A course can have multiple students enrolled.
 
@@ -81,6 +88,7 @@ class Course(models.Model):
     name = models.CharField(max_length=100)
     students = models.ManyToManyField(Student)
 ```
+
 ```python
 # Creating objects
 student1 = Student.objects.create(name="Alice")
@@ -97,12 +105,15 @@ alice_courses = student1.course_set.all()
 # Removing a student from a course
 course.students.remove(student2)
 ```
+
 ### Other examples
+
 - `Students and Courses` : A student can take multiple courses, and each course can have multiple students.
 - `Articles and Tags` : A blog post can have multiple tags, and each tag can be used on multiple posts.
 - `Users and Groups` : A user can belong to multiple groups, and each group can have multiple users.
 
 ## Many-to-One
+
 - An author may have written several books.
 - Each book is written by a single author.
 
@@ -116,6 +127,7 @@ class Book(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
 ```
+
 ```python
 # Creating objects
 author = Author.objects.create(name="J.K. Rowling")
@@ -131,11 +143,13 @@ book.save()
 ```
 
 ### Others examples
+
 - `Comments and Articles` : Multiple comments can be associated with a single blog post.
 - `Orders and Customers` : A customer can place multiple orders, but each order is associated with a single customer.
 - `Products and Suppliers` : Multiple products can be supplied by a single supplier.
 
 ## Reverse Relationships (Relations Inverses)
+
 - A parent can have multiple children.
 - Each child has a single parent.
 - To access a parent's children, use parent.children.all()
@@ -151,6 +165,7 @@ class Child(models.Model):
     parent = models.ForeignKey(Parent, on_delete=models.CASCADE, related_name='children')
 
 ```
+
 ```python
 # Creating objects
 parent = Parent.objects.create(name="Alice")
@@ -168,8 +183,148 @@ child1.delete()
 ```
 
 ### Other examples
+
 - `Company and Employees` : A company can have multiple employees, but each employee belongs to a single company
 - `School and Students` : A school can have multiple students, but each student is associated with a single school.
 - `Author and Books` : An author can write multiple books, and the reverse relationship allows access to the books of an author.
 
 [Documentation](https://docs.djangoproject.com/en/5.0/topics/db/models/)
+
+---
+
+Rule of thumb (this answers 90 % of cases)
+
+Put the relation on the side that depends on the other.
+
+1️⃣ ForeignKey — WHERE to put it
+Definition
+
+ForeignKey = many → one
+
+Many objects belong to one parent.
+
+Rule
+
+👉 Put the ForeignKey on the “many” side
+
+Example: Post → Comment
+class Post(models.Model):
+title = models.CharField(max_length=200)
+
+class Comment(models.Model):
+post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+Why:
+
+A post has many comments
+
+A comment belongs to one post
+
+Comment depends on Post
+
+❌ Wrong:
+
+class Post(models.Model):
+comment = models.ForeignKey(Comment)
+
+This limits a post to one comment.
+
+Another example: User → Post
+class Post(models.Model):
+author = models.ForeignKey(User, on_delete=models.SET_NULL)
+
+One user → many posts
+
+Post depends on User
+
+2️⃣ ManyToMany — WHERE to put it
+Definition
+
+Many objects ↔ many objects
+
+Rule
+
+👉 Put it where the relationship is conceptually owned
+
+Technically, Django creates a join table, so placement is about API clarity, not DB structure.
+
+Example: Post ↔ Category
+class Post(models.Model):
+categories = models.ManyToManyField(Category)
+
+Why?
+
+A post “has categories”
+
+Reads naturally:
+
+post.categories.all()
+
+You could put it on Category, but it’s less natural.
+
+Another example: User ↔ Saved Posts
+class Post(models.Model):
+saved_by = models.ManyToManyField(User, through="SavedPost")
+
+Why?
+
+“A post is saved by users”
+
+Clear reverse access:
+
+user.saved_posts.all()
+
+3️⃣ When to use a through model
+Rule
+
+👉 Use through= when the relationship has meaning or data
+
+Examples:
+
+created_at
+
+status
+
+role
+
+order
+
+reaction_type
+
+Example:
+
+class SavedPost(models.Model):
+user = models.ForeignKey(User, on_delete=models.CASCADE)
+post = models.ForeignKey(Post, on_delete=models.CASCADE)
+created_at = models.DateTimeField(auto_now_add=True)
+
+4️⃣ OneToOne — WHERE to put it
+Rule
+
+👉 Put it on the extension object
+
+Example: User → Profile
+
+class Profile(models.Model):
+user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+Why:
+
+Profile extends User
+
+Profile depends on User
+
+Clean separation
+
+5️⃣ Mental model (VERY important)
+Question If YES
+Can this object exist alone? It should NOT hold the FK
+Does it describe/extend another object? FK/OneToOne goes here
+Is it a pure relationship? ManyToMany / through
+6️⃣ Quick decision table
+Relationship Where to put it
+Post → Comment Comment.post = FK
+User → Post Post.author = FK
+Post ↔ Category Post.categories = M2M
+User ↔ Saved Post M2M with through
+User → Profile Profile.user = OneToOne
