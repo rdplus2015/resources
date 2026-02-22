@@ -114,6 +114,19 @@ All types are automatically converted to String when using `th:text`.
 <span th:text="true"></span>
 ```
 
+### temporary local variable
+```html
+<div th:with="msg = 'Variable locale Thymeleaf'">
+    <p>[[${msg}]]</p>
+</div>
+```
+
+```html
+<div th:with="fullName = ${user.firstName + ' ' + user.lastName}">
+    <p>[[${fullName}]]</p>
+</div>
+```
+Avoid to repeat a long expression
 
 ##  `@{...}` expression related to `th:href` : build a URL
 - `@{/}` -> "/"
